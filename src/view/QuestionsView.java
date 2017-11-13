@@ -27,6 +27,10 @@ public class QuestionsView extends JFrame {
             cells[i] = new JButton();
             cells[i].setPreferredSize(new Dimension(120,90));
 
+            if (i < 6) {
+                cells[i].setEnabled(false);
+            }
+
             cellsPanel.add(cells[i]);
         }
 

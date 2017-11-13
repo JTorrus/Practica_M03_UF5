@@ -3,10 +3,10 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class View extends JFrame {
+public class QuestionsView extends JFrame {
     private JButton[] cells;
 
-    public View() {
+    public QuestionsView() {
         this.setTitle("JeoPardy");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);

@@ -1,13 +1,13 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Category {
     private String name;
-    private ArrayList<Question> questions;
+    private HashMap<Integer, HashMap> questions;
 
-    public Category(String name, ArrayList<Question> questions) {
+    public Category(String name) {
         this.name = name;
-        this.questions = questions;
+        this.questions = new HashMap<>();
     }
 }

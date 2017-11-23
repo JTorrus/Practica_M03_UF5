@@ -4,9 +4,9 @@ public class Player {
     private String name;
     private int pts;
 
-    public Player(String name, int pts) {
+    public Player(String name) {
         this.name = name;
-        this.pts = pts;
+        this.pts = 0;
     }
 
     public String getName() {

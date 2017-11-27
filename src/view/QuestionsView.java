@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionsView extends JFrame {
-    private JButton[] cells;
+    public JButton[] cells;
     private JPanel player1Board;
     private JPanel player2Board;
     private JSplitPane playersInfo;

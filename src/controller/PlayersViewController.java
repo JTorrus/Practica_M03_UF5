@@ -23,6 +23,8 @@ public class PlayersViewController implements ActionListener{
             Player p2 = new Player(view.nameTwo.getText());
             QuestionsViewController c = new QuestionsViewController(p1, p2);
             view.dispose();
+        }else{
+            view.dispose();
         }
     }
 }

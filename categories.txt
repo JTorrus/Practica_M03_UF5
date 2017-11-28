@@ -1,1 +1,31 @@
-deporte;musica;geografia;cine;series
+Deporte;Geografia;Cine;Musica;Historia;Ciencia
+Deporte:100:¿En que equipo juega Lionel Messi?:Malaga:Valencia:Barcelona$
+Deporte:200:¿Quien es un famoso corredor Jamacaino?:Gerard Llanas:Usain Bolt$:Carl Lewis
+Deporte:300:¿En que equipo debuto Lebron James?:Cleveland Cavaliers$:Miami Heats:New York Knicks
+Deporte:400:¿Cuantos Grand Slam tiene Rafael Nadal?:8:16$:17
+Deporte:500:¿Cuantos jugadores tiene un equipo de Criquet?:11$:6:9
+Geografia:100:¿Cúal es la capital de Mexico?:Mexicali:Ciudad de Mexico$:Ciudad Juarez
+Geografia:200:¿Cúantos paises hablan español?:19:14:21$
+Geografia:300:¿Que pais pertenece a Centro America?:Argentina:El Salvador:Chile
+Geografia:400:¿Cúal es la capital de Bolivia?:La Paz$:Sucre:Santa Cruz
+Geografia:500:¿Cúal es el continente más poblado?:Europa:America:Asia$
+Cine:100:¿Cómo se llama la isla en la que vive King Kong?:Isla Prohibida:Isla Calavera$:Isla de Fuego
+Cine:200:¿Quién fue el primer director en llevar a la gran pantalla al detective Sherlock Holmes en el año 1900?:Arthur Marvin$:Buster Keaton:Albert Parker
+Cine:300:¿Cuántos Oscars tiene la película Casablanca?:0:2:3$
+Cine:400:¿Cuál de estas películas no es de Alfred Hitchcock?:La Soga:39 Escalones:The Girl$
+Cine:500:¿Cuántos Oscar a 'mejor película de habla no inglesa' ganó Ingmar Bergman?:5:3$:1
+Musica:100:¿Cuál de estos es el nombre de un álbum de los Beatles?:Revolver$:Lead Piping:Candlestick
+Musica:200:¿En qué ciudad inglesa nació Noel Gallagher?:Manchester$:Londes:Liverpool
+Musica:300:¿De qué país es Justin Bieber?:EEUU:Australia:Canada$
+Musica:400:¿Qué Beatle cantó la voz principal en 'Lady Madonna'?:John:George:Paul$
+Musica:500:Marvin Lee Aday es más conocido como el cantante...:Eminem:Meat Loaf$:Alice Cooper
+Historia:100:¿En que año descubrió Colón América?:1495:1502:1492$
+Historia:200:¿Cuál era la capital del Imperio Inca?:Lima:Cuzco$:Machu Picchu
+Historia:300:¿Cómo se llamaba el padre de Alejandro Magno?:Leonidas:Ptolomeo I:Filipo II de Macedonia$
+Historia:400:¿Cuándo se produjo principalmente el Siglo de Oro?:Siglo XV:Siglo XVI$:Siglo XVII
+Historia:500:¿Quién fue el primer emperador romano?:Cesar Augusto$:Julio Cesar:Amer Molina
+Ciencia:100:¿Cómo se llama el componente mínimo que forma a los seres vivos?:Particula:Tejido:Celula$
+Ciencia:200:El proceso por el que una célula se divide para formar dos células hijas se llama...:Mitosis$:Segregacion:Meiosis
+Ciencia:300:¿Con qué respira una ballena?:Branqueas:Pulmones$:Piel
+Ciencia:400:¿Qué inventó Alfred Nobel, el que da nombre a los famosos premios?:Bomba Atomica:Penicilina:Dinamita$
+Ciencia:500:¿Cuál es la principal función de los globulos rojos?:Llevar Oxigeno$:Coagular la sangre:Combatir enfermedades

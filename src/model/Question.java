@@ -7,10 +7,10 @@ public class Question {
     private int pts;
     private ArrayList<Answer> answers;
 
-    public Question(String text, int pts, ArrayList <Answer> answers) {
+    public Question(String text, int pts) {
         this.text = text;
         this.pts = pts;
-        this.answers = answers;
+        answers = new ArrayList<>();
     }
 
     @Override

@@ -5,6 +5,7 @@ import view.AnswerView;
 import view.QuestionsView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -21,22 +22,41 @@ public class QuestionsViewController implements ActionListener {
     private Player p2;
     private HashMap m1;
     private HashMap m2;
+    private int turn;
 
     public QuestionsViewController(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
-        this.view = new QuestionsView(p1.getName(), p2.getName(), p1.getPts(), p2.getPts());
+        this.turn = -1;
+        this.view = new QuestionsView(p1.getName(), p2.getName(), p1, p2);
         for (int i = 0; i < view.cells.length; i++) {
-            this.view.cells[i].addActionListener(this);
+            for (int j = 0; j < view.cells[i].length; j++) {
+                this.view.cells[i][j].addActionListener(this);
+            }
+
         }
-        loadData();
+        //loadData();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < view.cells.length; i++) {
-            if (view.cells[i] == e.getSource()) {
-                view.dispose();
+            for (int j = 0; j < view.cells[i].length; j++) {
+                if (view.cells[i][j] == e.getSource()) {
+                    view.cells[i][j].setEnabled(false);
+                    view.cells[i][j].setBackground(Color.BLACK);
+                    System.out.println(i + " " + j);
+                    turn++;
+                    System.out.println(turn);
+                    GameController gc = new GameController(p1, p2, turn);
+                    if (gc.actualTurn(turn)) {
+                        p1.setPts(p1.getPts() + 100);
+                        view.player1Pts.setText(String.valueOf(p1.getPts()));
+                    } else {
+                        p2.setPts(p1.getPts() + 100);
+                        view.player2Pts.setText(String.valueOf(p2.getPts()));
+                    }
+                }
             }
         }
     }
@@ -52,8 +72,8 @@ public class QuestionsViewController implements ActionListener {
             String linea;
             linea = br.readLine();
             datos = linea.split(";");
-            for (int i = 0; i <= 6; i++){
-                view.cells[i].setText(datos[i]);
+            for (int i = 0; i < 6; i++){
+                view.cells[i][i].setText(datos[i]);
             }
             while ((linea = br.readLine()) != null) {
                 datos = linea.split(";");

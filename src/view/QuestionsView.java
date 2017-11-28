@@ -1,22 +1,24 @@
 package view;
 
+import model.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class QuestionsView extends JFrame {
-    public JButton[] cells;
+    public JButton[][] cells;
     private JPanel player1Board;
     private JPanel player2Board;
     private JSplitPane playersInfo;
-    private JLabel player1, player2, player1Pts, player2Pts;
+    public JLabel player1, player2, player1Pts, player2Pts;
     private String p1Name, p2Name;
-    private int p1Pts, p2Pts;
+    public Player p1, p2;
 
-    public QuestionsView(String p1, String p2, int p1Pts, int p2Pts) {
+    public QuestionsView(String p1, String p2, Player p1Pts, Player p2Pts) {
         this.p1Name = p1;
         this.p2Name = p2;
-        this.p1Pts = p1Pts;
-        this.p2Pts = p2Pts;
+        this.p1 = p1Pts;
+        this.p2 = p2Pts;
         this.setTitle("JeoPardy");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -31,8 +33,8 @@ public class QuestionsView extends JFrame {
 
         player1 = new JLabel(p1Name);
         player2 = new JLabel(p2Name);
-        player1Pts = new JLabel(String.valueOf(p1Pts) + " PTS");
-        player2Pts = new JLabel(String.valueOf(p2Pts) + " PTS");
+        player1Pts = new JLabel(String.valueOf(p1.getPts()) + " PTS");
+        player2Pts = new JLabel(String.valueOf(p2.getPts()) + " PTS");
 
         player1.setHorizontalAlignment(SwingConstants.CENTER);
         player2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -54,23 +56,25 @@ public class QuestionsView extends JFrame {
         playersInfo.setDividerLocation(355);
 
         JPanel cellsPanel = new JPanel(new GridLayout(6, 6));
-        final int GRID_SIZE = 36;
-        cells = new JButton[GRID_SIZE];
-        for (int i = 0; i < GRID_SIZE; i++) {
-            cells[i] = new JButton();
-            cells[i].setPreferredSize(new Dimension(120,90));
+        cells = new JButton[6][6];
 
-            if (i < 6) {
-                cells[i].setEnabled(false);
-                cells[i].setBackground(Color.ORANGE);
-                cells[i].setBorder(BorderFactory.createMatteBorder(2, 2, 5, 2, Color.BLACK));
-            } else {
-                cells[i].setBackground(Color.BLUE);
-                cells[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
-                cells[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+                cells[i][j] = new JButton();
+                cells[i][j].setPreferredSize(new Dimension(120,90));
+
+                if (i == 0 && j < 6) {
+                    cells[i][j].setEnabled(false);
+                    cells[i][j].setBackground(Color.ORANGE);
+                    cells[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 5, 2, Color.BLACK));
+                } else {
+                    cells[i][j].setBackground(Color.BLUE);
+                    cells[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+                    cells[i][j].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+
+                cellsPanel.add(cells[i][j]);
             }
-
-            cellsPanel.add(cells[i]);
         }
 
         pane.add(cellsPanel, BorderLayout.CENTER);

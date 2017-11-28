@@ -17,16 +17,17 @@ public class QuestionsViewController implements ActionListener{
         this.p1 = p1;
         this.p2 = p2;
         this.view = new QuestionsView(p1.getName(), p2.getName(), p1.getPts(), p2.getPts());
+        for (int i = 0; i < view.cells.length; i++) {
+            this.view.cells[i].addActionListener(this);
+        }
     }
 
    @Override
    public void actionPerformed(ActionEvent e) {
-       JButton javi = (JButton) e.getSource();
-       for (int i = 6; i < view.cells.length; i++) {
-           if (javi == view.cells[i]) {
-               AnswerView answerView = new AnswerView();
+       for (int i = 0; i < view.cells.length; i++) {
+           if (view.cells[i] == e.getSource()) {
+               view.dispose();
            }
        }
-
     }
 }

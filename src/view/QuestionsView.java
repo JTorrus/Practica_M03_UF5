@@ -56,7 +56,6 @@ public class QuestionsView extends JFrame {
         JPanel cellsPanel = new JPanel(new GridLayout(6, 6));
         final int GRID_SIZE = 36;
         cells = new JButton[GRID_SIZE];
-
         for (int i = 0; i < GRID_SIZE; i++) {
             cells[i] = new JButton();
             cells[i].setPreferredSize(new Dimension(120,90));

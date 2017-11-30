@@ -9,13 +9,13 @@ public class AnswerView extends JFrame {
     private JButton res1, res2, res3, res4;
     private ArrayList<String> arrAnswers = new ArrayList<>();
 
-    public AnswerView(JPanel answers) {
+    public AnswerView() {
         arrAnswers.add("test1");
         arrAnswers.add("test2");
         arrAnswers.add("test3");
         arrAnswers.add("test4");
         this.setTitle("Answer this question");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         addComponentsToPane(this.getContentPane());
         this.pack();
@@ -23,7 +23,7 @@ public class AnswerView extends JFrame {
     }
 
     public void addComponentsToPane(Container pane) {
-        answers = new JPanel(new BorderLayout());
+        answers = new JPanel(new GridLayout(2, 2));
         res1 = new JButton(arrAnswers.get(0));
         res2 = new JButton(arrAnswers.get(1));
         res3 = new JButton(arrAnswers.get(2));

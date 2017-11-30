@@ -1,17 +1,13 @@
-package controller;
+package utilities;
 
-import model.Answer;
 import model.Player;
-import model.Question;
 
-public class GameController {
+public class GameManager {
     private Player player1;
     private Player player2;
     private int turn;
-    private boolean player1turn;
-    private boolean player2turn;
 
-    public GameController(Player player1, Player player2, int turn) {
+    public GameManager(Player player1, Player player2, int turn) {
         this.player1 = player1;
         this.player2 = player2;
         this.turn = turn;

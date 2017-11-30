@@ -11,14 +11,11 @@ public class QuestionsView extends JFrame {
     private JPanel player2Board;
     private JSplitPane playersInfo;
     public JLabel player1, player2, player1Pts, player2Pts;
-    private String p1Name, p2Name;
     public Player p1, p2;
 
-    public QuestionsView(String p1, String p2, Player p1Pts, Player p2Pts) {
-        this.p1Name = p1;
-        this.p2Name = p2;
-        this.p1 = p1Pts;
-        this.p2 = p2Pts;
+    public QuestionsView(Player p1, Player p2) {
+        this.p1 = p1;
+        this.p2 = p2;
         this.setTitle("JeoPardy");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -31,8 +28,8 @@ public class QuestionsView extends JFrame {
     void addComponentsToPane(Container pane) {
         pane.setLayout(new BorderLayout(8, 8));
 
-        player1 = new JLabel(p1Name);
-        player2 = new JLabel(p2Name);
+        player1 = new JLabel(p1.getName());
+        player2 = new JLabel(p2.getName());
         player1Pts = new JLabel(String.valueOf(p1.getPts()) + " PTS");
         player2Pts = new JLabel(String.valueOf(p2.getPts()) + " PTS");
 

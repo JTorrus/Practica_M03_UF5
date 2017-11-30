@@ -1,14 +1,24 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Category {
     private String name;
     ArrayList<Question> questions;
 
-    public Category(String name) {
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.questions = new ArrayList<>();
+    }
+
+    public void setQuestions(ArrayList<Question> questions) {
+        this.questions = questions;
     }
 }

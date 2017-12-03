@@ -21,7 +21,17 @@ public class GameManager {
         }
     }
 
-
+    public int setPunctuation(int pts) {
+        if (actualTurn(turn)) {
+            System.out.println("Turno de " + player2.getName());
+            player1.setPts(player1.getPts() + pts);
+            return player1.getPts();
+        } else {
+            System.out.println("Turno de " + player1.getName());
+            player2.setPts(player2.getPts() + pts);
+            return player2.getPts();
+        }
+    }
 
 
 }

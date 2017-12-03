@@ -25,13 +25,12 @@ public class QuestionsViewController implements ActionListener {
     private QuestionsView view;
     private Player p1;
     private Player p2;
-    private HashMap categories = new HashMap<String,HashMap>();
+    private HashMap categories = new HashMap<String, HashMap>();
     private int turn;
 
     public QuestionsViewController(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
-        this.turn = -1;
         this.view = new QuestionsView(p1, p2);
 
         for (int i = 0; i < view.cells.length; i++) {
@@ -48,21 +47,12 @@ public class QuestionsViewController implements ActionListener {
         for (int i = 0; i < view.cells.length; i++) {
             for (int j = 0; j < view.cells[i].length; j++) {
                 if (view.cells[i][j] == e.getSource()) {
+                    int posX = i;
+                    int posY = j;
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
-                    turn++;
-                    GameManager gc = new GameManager(p1, p2, turn);
-                    AnswersViewController aw = new AnswersViewController();
-
-                    if (gc.actualTurn(turn)) {
-                        System.out.println("Turno de " + p2.getName());
-                        p1.setPts(p1.getPts() + 100);
-                        view.player1Pts.setText(String.valueOf(p1.getPts()));
-                    } else {
-                        System.out.println("Turno de " + p1.getName());
-                        p2.setPts(p1.getPts() + 100);
-                        view.player2Pts.setText(String.valueOf(p2.getPts()));
-                    }
+                    System.out.println(posX + " " + posY);
+                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY);
                 }
             }
         }
@@ -77,50 +67,53 @@ public class QuestionsViewController implements ActionListener {
         try {
             br = Files.newBufferedReader(p1, StandardCharsets.UTF_8);
             String linea;
-            ArrayList<Question> aux = new ArrayList();
-            ArrayList<Answer> auxA = new ArrayList();
-            ArrayList<Question> auxQ = new ArrayList();
+            ArrayList<Question> aux = new ArrayList<>();
+            ArrayList<Answer> auxA;
+            ArrayList<Question> auxQ = new ArrayList<>();
+
             while ((linea = br.readLine()) != null) {
+                auxA = new ArrayList<>();
+
                 datos = linea.split(":");
-                for (int i = 3; i < datos.length; i++){
+                for (int i = 3; i < datos.length; i++) {
                     Answer a = new Answer();
-                    if (datos[i].contains("$")){
+                    if (datos[i].contains("$")) {
                         a.setCorrectAnswer(true);
-                        datos[i] = datos[i].replace("$","");
+                        datos[i] = datos[i].replace("$", "");
                         a.setText(datos[i]);
-                    }else{
+                    } else {
                         a.setCorrectAnswer(false);
                         a.setText(datos[i]);
                     }
                     auxA.add(a);
                 }
+
                 Question q = new Question();
                 q.setText(datos[2]);
                 q.setAnswers(auxA);
                 q.setCategory(datos[0]);
                 q.setPts(Integer.parseInt(datos[1]));
                 auxQ.add(q);
-                auxA.clear();
-
             }
+
             br = Files.newBufferedReader(p2, StandardCharsets.UTF_8);
-            while((linea = br.readLine()) != null){
+            while ((linea = br.readLine()) != null) {
                 datos = linea.split(":");
-                for (int i = 0; i < datos.length; i++){
+                for (int i = 0; i < datos.length; i++) {
                     Category c = new Category();
                     c.setName(datos[i]);
-                    for (Question item: auxQ){
-                        if (item.getCategory().equals(datos[i])){
+                    for (Question item : auxQ) {
+                        if (item.getCategory().equals(datos[i])) {
                             aux.add(item);
                         }
                     }
                     c.setQuestions(aux);
-                    HashMap questions = new HashMap<Question,ArrayList<Answer>>();
-                    for (int j = 0; j < c.getQuestions().size(); j++){
-                        questions.put(c.getQuestions().get(j),c.getQuestions().get(j).getAnswers());
+                    HashMap questions = new HashMap<Question, ArrayList<Answer>>();
+                    for (int j = 0; j < c.getQuestions().size(); j++) {
+                        questions.put(c.getQuestions().get(j), c.getQuestions().get(j).getAnswers());
                     }
 
-                    categories.put(c.getName(),questions);
+                    categories.put(c.getName(), questions);
                     aux.clear();
                 }
             }
@@ -129,7 +122,7 @@ public class QuestionsViewController implements ActionListener {
             Iterator it;
             for (int i = 0; i < view.cells.length; i++) {
                 it = categories.entrySet().iterator();
-                while(it.hasNext()){
+                while (it.hasNext()) {
                     for (int j = 0; j < view.cells[i].length; j++) {
                         HashMap.Entry e = (HashMap.Entry) it.next();
                         Iterator secondMap = ((HashMap) e.getValue()).entrySet().iterator();
@@ -141,31 +134,31 @@ public class QuestionsViewController implements ActionListener {
                                     break;
                                 case 1:
                                     Question c = c = (Question) e2.getKey();
-                                    if (c.getPts() == (i*100)){
+                                    if (c.getPts() == (i * 100)) {
                                         view.cells[i][j].setText(String.valueOf(c.getPts()));
                                     }
                                     break;
                                 case 2:
                                     c = (Question) e2.getKey();
-                                    if (c.getPts() == (i*100)){
+                                    if (c.getPts() == (i * 100)) {
                                         view.cells[i][j].setText(String.valueOf(c.getPts()));
                                     }
                                     break;
                                 case 3:
                                     c = (Question) e2.getKey();
-                                    if (c.getPts() == (i*100)){
+                                    if (c.getPts() == (i * 100)) {
                                         view.cells[i][j].setText(String.valueOf(c.getPts()));
                                     }
                                     break;
                                 case 4:
                                     c = (Question) e2.getKey();
-                                    if (c.getPts() == (i*100)){
+                                    if (c.getPts() == (i * 100)) {
                                         view.cells[i][j].setText(String.valueOf(c.getPts()));
                                     }
                                     break;
                                 case 5:
                                     c = (Question) e2.getKey();
-                                    if (c.getPts() == (i*100)){
+                                    if (c.getPts() == (i * 100)) {
                                         view.cells[i][j].setText(String.valueOf(c.getPts()));
                                     }
                                     break;

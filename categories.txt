@@ -5,7 +5,7 @@ Deporte:400:¿Cuantos Grand Slam tiene Rafael Nadal?:8:16$:17
 Deporte:500:¿Cuantos jugadores tiene un equipo de Criquet?:11$:6:9
 Geografia:100:¿Cúal es la capital de Mexico?:Mexicali:Ciudad de Mexico$:Ciudad Juarez
 Geografia:200:¿Cúantos paises hablan español?:19:14:21$
-Geografia:300:¿Que pais pertenece a Centro America?:Argentina:El Salvador:Chile
+Geografia:300:¿Que pais pertenece a Centro America?:Argentina:El Salvador$:Chile
 Geografia:400:¿Cúal es la capital de Bolivia?:La Paz$:Sucre:Santa Cruz
 Geografia:500:¿Cúal es el continente más poblado?:Europa:America:Asia$
 Cine:100:¿Cómo se llama la isla en la que vive King Kong?:Isla Prohibida:Isla Calavera$:Isla de Fuego

@@ -1,6 +1,9 @@
 package controller;
 
+import model.Answer;
+import model.Category;
 import model.Player;
+import model.Question;
 import utilities.GameManager;
 import view.QuestionsView;
 
@@ -13,14 +16,16 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class QuestionsViewController implements ActionListener {
     private QuestionsView view;
     private Player p1;
     private Player p2;
-    private HashMap m1;
-    private HashMap m2;
+    private HashMap categories = new HashMap<String,HashMap>();
     private int turn;
 
     public QuestionsViewController(Player p1, Player p2) {
@@ -48,6 +53,7 @@ public class QuestionsViewController implements ActionListener {
                     turn++;
                     GameManager gc = new GameManager(p1, p2, turn);
                     AnswersViewController aw = new AnswersViewController();
+
                     if (gc.actualTurn(turn)) {
                         System.out.println("Turno de " + p2.getName());
                         p1.setPts(p1.getPts() + 100);
@@ -65,24 +71,113 @@ public class QuestionsViewController implements ActionListener {
     private void loadData() {
         BufferedReader br = null;
         String[] datos = null;
-        HashMap m1 = new HashMap();
-        HashMap m2 = new HashMap();
         Path p1 = FileSystems.getDefault().getPath("./categories.txt");
+        Path p2 = FileSystems.getDefault().getPath("namecategories.txt");
+
         try {
             br = Files.newBufferedReader(p1, StandardCharsets.UTF_8);
             String linea;
-            linea = br.readLine();
-            datos = linea.split(";");
-            for (int i = 0; i < 6; i++){
-                view.cells[i][i].setText(datos[i]);
-            }
+            ArrayList<Question> aux = new ArrayList();
+            ArrayList<Answer> auxA = new ArrayList();
+            ArrayList<Question> auxQ = new ArrayList();
             while ((linea = br.readLine()) != null) {
-                datos = linea.split(";");
+                datos = linea.split(":");
+                for (int i = 3; i < datos.length; i++){
+                    Answer a = new Answer();
+                    if (datos[i].contains("$")){
+                        a.setCorrectAnswer(true);
+                        datos[i] = datos[i].replace("$","");
+                        a.setText(datos[i]);
+                    }else{
+                        a.setCorrectAnswer(false);
+                        a.setText(datos[i]);
+                    }
+                    auxA.add(a);
+                }
+                Question q = new Question();
+                q.setText(datos[2]);
+                q.setAnswers(auxA);
+                q.setCategory(datos[0]);
+                q.setPts(Integer.parseInt(datos[1]));
+                auxQ.add(q);
+                auxA.clear();
 
             }
+            br = Files.newBufferedReader(p2, StandardCharsets.UTF_8);
+            while((linea = br.readLine()) != null){
+                datos = linea.split(":");
+                for (int i = 0; i < datos.length; i++){
+                    Category c = new Category();
+                    c.setName(datos[i]);
+                    for (Question item: auxQ){
+                        if (item.getCategory().equals(datos[i])){
+                            aux.add(item);
+                        }
+                    }
+                    c.setQuestions(aux);
+                    HashMap questions = new HashMap<Question,ArrayList<Answer>>();
+                    for (int j = 0; j < c.getQuestions().size(); j++){
+                        questions.put(c.getQuestions().get(j),c.getQuestions().get(j).getAnswers());
+                    }
+
+                    categories.put(c.getName(),questions);
+                    aux.clear();
+                }
+            }
+
+
+            Iterator it;
+            for (int i = 0; i < view.cells.length; i++) {
+                it = categories.entrySet().iterator();
+                while(it.hasNext()){
+                    for (int j = 0; j < view.cells[i].length; j++) {
+                        HashMap.Entry e = (HashMap.Entry) it.next();
+                        Iterator secondMap = ((HashMap) e.getValue()).entrySet().iterator();
+                        while (secondMap.hasNext()) {
+                            HashMap.Entry e2 = (HashMap.Entry) secondMap.next();
+                            switch (i) {
+                                case 0:
+                                    view.cells[i][j].setText((String) e.getKey());
+                                    break;
+                                case 1:
+                                    Question c = c = (Question) e2.getKey();
+                                    if (c.getPts() == (i*100)){
+                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
+                                    }
+                                    break;
+                                case 2:
+                                    c = (Question) e2.getKey();
+                                    if (c.getPts() == (i*100)){
+                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
+                                    }
+                                    break;
+                                case 3:
+                                    c = (Question) e2.getKey();
+                                    if (c.getPts() == (i*100)){
+                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
+                                    }
+                                    break;
+                                case 4:
+                                    c = (Question) e2.getKey();
+                                    if (c.getPts() == (i*100)){
+                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
+                                    }
+                                    break;
+                                case 5:
+                                    c = (Question) e2.getKey();
+                                    if (c.getPts() == (i*100)){
+                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
         } catch (IOException e) {
-            System.err.println("Error al acceder la fichero");
+            e.printStackTrace();
         }
+
 
     }
 }

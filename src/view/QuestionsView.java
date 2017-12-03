@@ -62,10 +62,10 @@ public class QuestionsView extends JFrame {
 
                 if (i == 0 && j < 6) {
                     cells[i][j].setEnabled(false);
-                    cells[i][j].setBackground(Color.ORANGE);
+                    cells[i][j].setBackground(Color.RED);
                     cells[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 5, 2, Color.BLACK));
                 } else {
-                    cells[i][j].setBackground(Color.BLUE);
+                    cells[i][j].setBackground(Color.YELLOW);
                     cells[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
                     cells[i][j].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }

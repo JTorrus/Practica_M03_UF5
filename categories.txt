@@ -1,4 +1,3 @@
-Deporte;Geografia;Cine;Musica;Historia;Ciencia
 Deporte:100:¿En que equipo juega Lionel Messi?:Malaga:Valencia:Barcelona$
 Deporte:200:¿Quien es un famoso corredor Jamacaino?:Gerard Llanas:Usain Bolt$:Carl Lewis
 Deporte:300:¿En que equipo debuto Lebron James?:Cleveland Cavaliers$:Miami Heats:New York Knicks

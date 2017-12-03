@@ -3,14 +3,40 @@ package model;
 import java.util.ArrayList;
 
 public class Question {
-    private String text;
+    private String text,category;
     private int pts;
     private ArrayList<Answer> answers;
 
-    public Question(String text, int pts) {
+    public String getText() {
+        return text;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setText(String text) {
         this.text = text;
+    }
+
+    public int getPts() {
+        return pts;
+    }
+
+    public void setPts(int pts) {
         this.pts = pts;
-        answers = new ArrayList<>();
+    }
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
     }
 
     @Override
@@ -18,6 +44,7 @@ public class Question {
         return "Question{" +
                 "text='" + text + '\'' +
                 ", pts=" + pts +
+                ", answers=" + answers +
                 '}';
     }
 }

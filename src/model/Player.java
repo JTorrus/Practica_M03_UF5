@@ -22,6 +22,6 @@ public class Player {
     }
 
     public void setPts(int pts) {
-        this.pts = pts;
+        this.pts += pts;
     }
 }

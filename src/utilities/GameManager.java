@@ -7,31 +7,25 @@ public class GameManager {
     private Player player2;
     private int turn;
 
-    public GameManager(Player player1, Player player2, int turn) {
+    public void nextTurn() {
+        this.turn++;
+    }
+
+    public GameManager(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.turn = turn;
+        this.turn = 0;
     }
 
-    public boolean actualTurn(int turn) {
+    public Player actualPlayer(int turn) {
         if (turn % 2 == 0) {
-            return false;
+            return player1;
         } else {
-            return true;
+            return player2;
         }
     }
 
-    public int setPunctuation(int pts) {
-        if (actualTurn(turn)) {
-            System.out.println("Turno de " + player2.getName());
-            player1.setPts(player1.getPts() + pts);
-            return player1.getPts();
-        } else {
-            System.out.println("Turno de " + player1.getName());
-            player2.setPts(player2.getPts() + pts);
-            return player2.getPts();
-        }
+    public int getTurn() {
+        return turn;
     }
-
-
 }

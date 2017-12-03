@@ -26,12 +26,13 @@ public class QuestionsViewController implements ActionListener {
     private Player p1;
     private Player p2;
     private HashMap categories = new HashMap<String, HashMap>();
-    private int turn;
+    private GameManager gameManager;
 
     public QuestionsViewController(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
         this.view = new QuestionsView(p1, p2);
+        gameManager = new GameManager(p1, p2);
 
         for (int i = 0; i < view.cells.length; i++) {
             for (int j = 0; j < view.cells[i].length; j++) {
@@ -52,10 +53,11 @@ public class QuestionsViewController implements ActionListener {
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
                     System.out.println(posX + " " + posY);
-                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY);
+                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY, view, gameManager.actualPlayer(gameManager.getTurn()));
                 }
             }
         }
+        gameManager.nextTurn();
     }
 
     private void loadData() {

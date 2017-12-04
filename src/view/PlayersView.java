@@ -51,7 +51,7 @@ public class PlayersView extends JFrame {
         gc.gridy = 0;
         contentPane.add(start, gc);
 
-       gc.gridx = 2;
+        gc.gridx = 2;
         gc.gridy = 1;
         contentPane.add(exit, gc);
 

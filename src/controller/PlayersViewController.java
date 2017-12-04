@@ -21,13 +21,13 @@ public class PlayersViewController implements ActionListener, KeyListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.view.start){
+        if (e.getSource() == this.view.start&&!(view.nameOne.getText().equals(view.nameTwo.getText()))){
             Player p1 = new Player(view.nameOne.getText());
             Player p2 = new Player(view.nameTwo.getText());
             QuestionsViewController c = new QuestionsViewController(p1, p2);
             view.dispose();
         }else{
-            view.dispose();
+            view.playerTwo.setText("Cambia este nombre.");
         }
     }
 

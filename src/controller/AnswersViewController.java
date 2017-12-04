@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,12 @@ public class AnswersViewController implements ActionListener {
     public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, QuestionsView questionsView, Player player) {
         this.questionsView = questionsView;
         this.view = new AnswerView();
+        this.view.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                questionsView.setVisible(true);
+            }
+        });
         this.categories = categories;
         this.cells = cells;
         this.posX = posX;
@@ -46,7 +53,6 @@ public class AnswersViewController implements ActionListener {
         for (Map.Entry<String, HashMap> elem : categories.entrySet()) {
             String key = elem.getKey();
             HashMap<Question, ArrayList<Answer>> value = elem.getValue();
-
             if (cells[0][posY].getText().equals(key)) {
                 for (Map.Entry<Question, ArrayList<Answer>> child : value.entrySet()) {
                     Question childKey = child.getKey();
@@ -78,42 +84,87 @@ public class AnswersViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        questionsView.setVisible(false);
         if (e.getSource() == view.res1) {
             for (Answer answer : answers) {
                 System.out.println(answer.getText());
                 if (answer.getText().equals(view.res1.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res1.setBackground(Color.GREEN);
+                        view.res2.setEnabled(false);
+                        view.res3.setEnabled(false);
                         printPts();
                     } else {
                         view.res1.setBackground(Color.RED);
+                        for (Answer correctAnswer: answers){
+                            if (correctAnswer.isCorrectAnswer()){
+                                if (correctAnswer.getText().equals(view.res2.getText())){
+                                    view.res2.setBackground(Color.GREEN);
+                                    view.res3.setBackground(Color.RED);
+                                }else if(correctAnswer.getText().equals(view.res3.getText())){
+                                    view.res2.setBackground(Color.RED);
+                                    view.res3.setBackground(Color.GREEN);
+                                }
+                            }
+                        }
                     }
                 }
             }
+
         } else if (e.getSource() == view.res2) {
             for (Answer answer : answers) {
                 System.out.println(answer.getText());
                 if (answer.getText().equals(view.res2.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res2.setBackground(Color.GREEN);
+                        view.res1.setEnabled(false);
+                        view.res3.setEnabled(false);
                         printPts();
                     } else {
                         view.res2.setBackground(Color.RED);
+                        for (Answer correctAnswer: answers){
+                            if (correctAnswer.isCorrectAnswer()){
+                                if (correctAnswer.getText().equals(view.res1.getText())){
+                                    view.res1.setBackground(Color.GREEN);
+                                    view.res3.setBackground(Color.RED);
+                                }else if(correctAnswer.getText().equals(view.res3.getText())){
+                                    view.res1.setBackground(Color.RED);
+                                    view.res3.setBackground(Color.GREEN);
+                                }
+                            }
+                        }
                     }
                 }
             }
+
         } else if (e.getSource() == view.res3) {
             for (Answer answer : answers) {
                 System.out.println(answer.getText());
                 if (answer.getText().equals(view.res3.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res3.setBackground(Color.GREEN);
+                        view.res1.setEnabled(false);
+                        view.res2.setEnabled(false);
                         printPts();
                     } else {
                         view.res3.setBackground(Color.RED);
+                        for (Answer correctAnswer: answers){
+                            if (correctAnswer.isCorrectAnswer()){
+                                if (correctAnswer.getText().equals(view.res1.getText())){
+                                    view.res1.setBackground(Color.GREEN);
+                                    view.res2.setBackground(Color.RED);
+                                }else if(correctAnswer.getText().equals(view.res2.getText())){
+                                    view.res1.setBackground(Color.RED);
+                                    view.res2.setBackground(Color.GREEN);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
+
+
+
 }

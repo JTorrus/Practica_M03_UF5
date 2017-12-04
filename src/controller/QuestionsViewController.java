@@ -54,6 +54,7 @@ public class QuestionsViewController implements ActionListener {
                     view.cells[i][j].setBackground(Color.BLACK);
                     System.out.println(posX + " " + posY);
                     AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY, view, gameManager.actualPlayer(gameManager.getTurn()));
+                    view.setVisible(false);
                 }
             }
         }

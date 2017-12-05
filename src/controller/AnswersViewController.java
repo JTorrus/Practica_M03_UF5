@@ -16,15 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AnswersViewController implements ActionListener {
-    private ArrayList<Answer> answers;
-    private Question question;
+    public ArrayList<Answer> answers;
+    private QuestionsViewController questionsViewController;
+    public Question question;
     private AnswerView view;
     private GameManager gameManager;
     private int posX, posY;
     private JButton[][] cells;
     private HashMap<String, HashMap> categories;
 
-    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, GameManager gameManager) {
+    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, GameManager gameManager, QuestionsViewController questionsViewController) {
+        this.questionsViewController = questionsViewController;
         this.view = new AnswerView();
         this.categories = categories;
         this.cells = cells;
@@ -40,7 +42,7 @@ public class AnswersViewController implements ActionListener {
         detectQuestion();
     }
 
-    private void detectQuestion() {
+    public void detectQuestion() {
         for (Map.Entry<String, HashMap> elem : categories.entrySet()) {
             String key = elem.getKey();
             HashMap<Question, ArrayList<Answer>> value = elem.getValue();
@@ -73,6 +75,7 @@ public class AnswersViewController implements ActionListener {
                         view.res1.setBackground(Color.GREEN);
                         view.res2.setEnabled(false);
                         view.res3.setEnabled(false);
+                        questionsViewController.printPositivePts();
                     } else {
                         view.res1.setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
@@ -86,12 +89,12 @@ public class AnswersViewController implements ActionListener {
                                 }
                             }
                         }
-                        //printNegativePts();
+                        questionsViewController.printNegativePts();
                     }
                 }
             }
 
-            //printTurns();
+            questionsViewController.printTurns();
 
         } else if (e.getSource() == view.res2) {
             for (Answer answer : answers) {
@@ -101,7 +104,7 @@ public class AnswersViewController implements ActionListener {
                         view.res2.setBackground(Color.GREEN);
                         view.res1.setEnabled(false);
                         view.res3.setEnabled(false);
-                        //printPositivePts();
+                        questionsViewController.printPositivePts();
                     } else {
                         view.res2.setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
@@ -115,12 +118,12 @@ public class AnswersViewController implements ActionListener {
                                 }
                             }
                         }
-                        //printNegativePts();
+                        questionsViewController.printNegativePts();
                     }
                 }
             }
 
-            //printTurns();
+            questionsViewController.printTurns();
 
         } else if (e.getSource() == view.res3) {
             for (Answer answer : answers) {
@@ -130,7 +133,7 @@ public class AnswersViewController implements ActionListener {
                         view.res3.setBackground(Color.GREEN);
                         view.res1.setEnabled(false);
                         view.res2.setEnabled(false);
-                        //printPositivePts();
+                        questionsViewController.printPositivePts();
                     } else {
                         view.res3.setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
@@ -144,11 +147,11 @@ public class AnswersViewController implements ActionListener {
                                 }
                             }
                         }
-                        //printNegativePts();
+                        questionsViewController.printNegativePts();
                     }
                 }
             }
-            //printTurns();
+            questionsViewController.printTurns();
         }
     }
 }

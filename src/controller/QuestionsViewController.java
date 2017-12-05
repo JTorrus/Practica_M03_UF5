@@ -25,6 +25,8 @@ public class QuestionsViewController implements ActionListener {
     private QuestionsView view;
     private Player p1;
     private Player p2;
+    private AnswersViewController answersViewController;
+    private Player player;
     private HashMap categories = new HashMap<String, HashMap>();
     private GameManager gameManager;
 
@@ -53,11 +55,13 @@ public class QuestionsViewController implements ActionListener {
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
                     System.out.println(posX + " " + posY);
-                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY, gameManager);
+                    answersViewController = new AnswersViewController(categories, view.cells, posX, posY, gameManager, this);
                 }
             }
         }
 
+        answersViewController.detectQuestion();
+        player = gameManager.actualPlayer(gameManager.getTurn());
         gameManager.nextTurn();
     }
 
@@ -175,5 +179,35 @@ public class QuestionsViewController implements ActionListener {
         }
 
 
+    }
+
+    public void printPositivePts() {
+        if (p1.getName().equals(player.getName())) {
+            player.setPts(answersViewController.question.getPts());
+            view.player1Pts.setText(String.valueOf(player.getPts()) + " PTS");
+        } else {
+            player.setPts(answersViewController.question.getPts());
+            view.player2Pts.setText(String.valueOf(player.getPts()) + " PTS");
+        }
+    }
+
+    public void printNegativePts() {
+        if (p1.getName().equals(player.getName())) {
+            player.setNegativePts(answersViewController.question.getPts());
+            view.player1Pts.setText(String.valueOf(player.getPts()) + " PTS");
+        } else {
+            player.setNegativePts(answersViewController.question.getPts());
+            view.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        }
+    }
+
+    public void printTurns() {
+        if (p1.getName().equals(player.getName())) {
+            view.player2Board.setBackground(Color.GREEN);
+            view.player1Board.setBackground(Color.WHITE);
+        } else {
+            view.player2Board.setBackground(Color.WHITE);
+            view.player1Board.setBackground(Color.GREEN);
+        }
     }
 }

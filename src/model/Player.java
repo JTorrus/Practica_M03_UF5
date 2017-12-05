@@ -24,4 +24,12 @@ public class Player {
     public void setPts(int pts) {
         this.pts += pts;
     }
+
+    public void setNegativePts (int pts) {
+        if (this.pts - pts < 0) {
+            this.pts = 0;
+        } else {
+            this.pts -= pts;
+        }
+    }
 }

@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class PlayersViewController implements ActionListener, KeyListener{
+public class PlayersViewController implements ActionListener, KeyListener {
     private PlayersView view;
 
-    public PlayersViewController(){
+    public PlayersViewController() {
         this.view = new PlayersView();
         this.view.start.setEnabled(false);
         this.view.start.addActionListener(this);
@@ -21,14 +21,10 @@ public class PlayersViewController implements ActionListener, KeyListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.view.start&&!(view.nameOne.getText().equals(view.nameTwo.getText()))){
-            Player p1 = new Player(view.nameOne.getText());
-            Player p2 = new Player(view.nameTwo.getText());
-            QuestionsViewController c = new QuestionsViewController(p1, p2);
-            view.dispose();
-        }else{
-            view.playerTwo.setText("Cambia este nombre.");
-        }
+        Player p1 = new Player(view.nameOne.getText());
+        Player p2 = new Player(view.nameTwo.getText());
+        QuestionsViewController c = new QuestionsViewController(p1, p2);
+        view.dispose();
     }
 
     @Override

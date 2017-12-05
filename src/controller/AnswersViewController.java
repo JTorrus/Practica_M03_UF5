@@ -10,11 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class AnswersViewController implements ActionListener {
     private ArrayList<Answer> answers;
@@ -72,13 +70,33 @@ public class AnswersViewController implements ActionListener {
         }
     }
 
-    public void printPts() {
+    public void printPositivePts() {
         if (questionsView.player1.getText().equals(player.getName())) {
             player.setPts(question.getPts());
             questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
         } else {
             player.setPts(question.getPts());
             questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        }
+    }
+
+    public void printNegativePts() {
+        if (questionsView.player1.getText().equals(player.getName())) {
+            player.setNegativePts(question.getPts());
+            questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        } else {
+            player.setNegativePts(question.getPts());
+            questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        }
+    }
+
+    public void printTurns() {
+        if (questionsView.player1.getText().equals(player.getName())) {
+            questionsView.player2Board.setBackground(Color.GREEN);
+            questionsView.player1Board.setBackground(Color.WHITE);
+        } else {
+            questionsView.player2Board.setBackground(Color.WHITE);
+            questionsView.player1Board.setBackground(Color.GREEN);
         }
     }
 
@@ -93,23 +111,26 @@ public class AnswersViewController implements ActionListener {
                         view.res1.setBackground(Color.GREEN);
                         view.res2.setEnabled(false);
                         view.res3.setEnabled(false);
-                        printPts();
+                        printPositivePts();
                     } else {
                         view.res1.setBackground(Color.RED);
-                        for (Answer correctAnswer: answers){
-                            if (correctAnswer.isCorrectAnswer()){
-                                if (correctAnswer.getText().equals(view.res2.getText())){
+                        for (Answer correctAnswer : answers) {
+                            if (correctAnswer.isCorrectAnswer()) {
+                                if (correctAnswer.getText().equals(view.res2.getText())) {
                                     view.res2.setBackground(Color.GREEN);
                                     view.res3.setBackground(Color.RED);
-                                }else if(correctAnswer.getText().equals(view.res3.getText())){
+                                } else if (correctAnswer.getText().equals(view.res3.getText())) {
                                     view.res2.setBackground(Color.RED);
                                     view.res3.setBackground(Color.GREEN);
                                 }
                             }
                         }
+                        printNegativePts();
                     }
                 }
             }
+
+            printTurns();
 
         } else if (e.getSource() == view.res2) {
             for (Answer answer : answers) {
@@ -119,23 +140,26 @@ public class AnswersViewController implements ActionListener {
                         view.res2.setBackground(Color.GREEN);
                         view.res1.setEnabled(false);
                         view.res3.setEnabled(false);
-                        printPts();
+                        printPositivePts();
                     } else {
                         view.res2.setBackground(Color.RED);
-                        for (Answer correctAnswer: answers){
-                            if (correctAnswer.isCorrectAnswer()){
-                                if (correctAnswer.getText().equals(view.res1.getText())){
+                        for (Answer correctAnswer : answers) {
+                            if (correctAnswer.isCorrectAnswer()) {
+                                if (correctAnswer.getText().equals(view.res1.getText())) {
                                     view.res1.setBackground(Color.GREEN);
                                     view.res3.setBackground(Color.RED);
-                                }else if(correctAnswer.getText().equals(view.res3.getText())){
+                                } else if (correctAnswer.getText().equals(view.res3.getText())) {
                                     view.res1.setBackground(Color.RED);
                                     view.res3.setBackground(Color.GREEN);
                                 }
                             }
                         }
+                        printNegativePts();
                     }
                 }
             }
+
+            printTurns();
 
         } else if (e.getSource() == view.res3) {
             for (Answer answer : answers) {
@@ -145,26 +169,25 @@ public class AnswersViewController implements ActionListener {
                         view.res3.setBackground(Color.GREEN);
                         view.res1.setEnabled(false);
                         view.res2.setEnabled(false);
-                        printPts();
+                        printPositivePts();
                     } else {
                         view.res3.setBackground(Color.RED);
-                        for (Answer correctAnswer: answers){
-                            if (correctAnswer.isCorrectAnswer()){
-                                if (correctAnswer.getText().equals(view.res1.getText())){
+                        for (Answer correctAnswer : answers) {
+                            if (correctAnswer.isCorrectAnswer()) {
+                                if (correctAnswer.getText().equals(view.res1.getText())) {
                                     view.res1.setBackground(Color.GREEN);
                                     view.res2.setBackground(Color.RED);
-                                }else if(correctAnswer.getText().equals(view.res2.getText())){
+                                } else if (correctAnswer.getText().equals(view.res2.getText())) {
                                     view.res1.setBackground(Color.RED);
                                     view.res2.setBackground(Color.GREEN);
                                 }
                             }
                         }
+                        printNegativePts();
                     }
                 }
             }
+            printTurns();
         }
     }
-
-
-
 }

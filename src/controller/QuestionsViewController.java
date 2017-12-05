@@ -53,7 +53,7 @@ public class QuestionsViewController implements ActionListener {
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
                     System.out.println(posX + " " + posY);
-                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY, view, gameManager.actualPlayer(gameManager.getTurn()));
+                    AnswersViewController aw = new AnswersViewController(categories, view.cells, posX, posY, view, gameManager.actualPlayer(gameManager.getTurn()), gameManager);
                     view.setVisible(false);
                 }
             }

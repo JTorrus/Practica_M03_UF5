@@ -3,6 +3,7 @@ package controller;
 import model.Answer;
 import model.Player;
 import model.Question;
+import utilities.GameManager;
 import view.AnswerView;
 import view.QuestionsView;
 
@@ -19,12 +20,13 @@ public class AnswersViewController implements ActionListener {
     private Question question;
     private AnswerView view;
     private QuestionsView questionsView;
+    private GameManager gameManager;
     private int posX, posY;
     private JButton[][] cells;
     private Player player;
     private HashMap<String, HashMap> categories;
 
-    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, QuestionsView questionsView, Player player) {
+    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, QuestionsView questionsView, Player player, GameManager gameManager) {
         this.questionsView = questionsView;
         this.view = new AnswerView();
         this.view.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -40,6 +42,7 @@ public class AnswersViewController implements ActionListener {
         this.player = player;
         answers = new ArrayList<>();
         question = new Question();
+        this.gameManager = gameManager;
         view.setVisible(true);
         view.res1.addActionListener(this);
         view.res2.addActionListener(this);
@@ -56,14 +59,27 @@ public class AnswersViewController implements ActionListener {
                     Question childKey = child.getKey();
                     ArrayList<Answer> childValue = child.getValue();
 
-                    if (childKey.getPts() == Integer.valueOf(cells[posX][posY].getText())) {
-                        view.questionText.setText(childKey.getText());
-                        view.res1.setText(childValue.get(0).getText());
-                        view.res2.setText(childValue.get(1).getText());
-                        view.res3.setText(childValue.get(2).getText());
+                    if (gameManager.doubleRound()) {
+                        System.out.println(((Integer.valueOf(cells[posX][posY].getText())) / 2));
+                        if (childKey.getPts() == ((Integer.valueOf(cells[posX][posY].getText())) / 2)) {
+                            view.questionText.setText(childKey.getText());
+                            view.res1.setText(childValue.get(0).getText());
+                            view.res2.setText(childValue.get(1).getText());
+                            view.res3.setText(childValue.get(2).getText());
 
-                        answers = childValue;
-                        question = childKey;
+                            answers = childValue;
+                            question = childKey;
+                        }
+                    } else {
+                        if (childKey.getPts() == Integer.valueOf(cells[posX][posY].getText())) {
+                            view.questionText.setText(childKey.getText());
+                            view.res1.setText(childValue.get(0).getText());
+                            view.res2.setText(childValue.get(1).getText());
+                            view.res3.setText(childValue.get(2).getText());
+
+                            answers = childValue;
+                            question = childKey;
+                        }
                     }
                 }
             }
@@ -71,22 +87,42 @@ public class AnswersViewController implements ActionListener {
     }
 
     public void printPositivePts() {
-        if (questionsView.player1.getText().equals(player.getName())) {
-            player.setPts(question.getPts());
-            questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
-        } else {
-            player.setPts(question.getPts());
-            questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        if (gameManager.doubleRound()){
+            if (questionsView.player1.getText().equals(player.getName())) {
+                player.setPts(question.getPts()*2);
+                questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            } else {
+                player.setPts(question.getPts()*2);
+                questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            }
+        }else{
+            if (questionsView.player1.getText().equals(player.getName())) {
+                player.setPts(question.getPts());
+                questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            } else {
+                player.setPts(question.getPts());
+                questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            }
         }
     }
 
     public void printNegativePts() {
-        if (questionsView.player1.getText().equals(player.getName())) {
-            player.setNegativePts(question.getPts());
-            questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
-        } else {
-            player.setNegativePts(question.getPts());
-            questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+        if (gameManager.doubleRound()){
+            if (questionsView.player1.getText().equals(player.getName())) {
+                player.setNegativePts(question.getPts()*2);
+                questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            } else {
+                player.setNegativePts(question.getPts()*2);
+                questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            }
+        }else{
+            if (questionsView.player1.getText().equals(player.getName())) {
+                player.setNegativePts(question.getPts());
+                questionsView.player1Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            } else {
+                player.setNegativePts(question.getPts());
+                questionsView.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            }
         }
     }
 
@@ -102,6 +138,10 @@ public class AnswersViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (gameManager.doubleRound()) {
+            setValuesToDoubleRound();
+        }
+
         questionsView.setVisible(false);
         if (e.getSource() == view.res1) {
             for (Answer answer : answers) {
@@ -188,6 +228,21 @@ public class AnswersViewController implements ActionListener {
                 }
             }
             printTurns();
+        }
+    }
+
+    public void setValuesToDoubleRound() {
+        int aux = 0;
+
+        if (gameManager.getTurn() == 10) {
+            for (int i = 1; i < questionsView.cells.length; i++) {
+                for (int j = 0; j < questionsView.cells[i].length; j++) {
+                    if (questionsView.cells[i][j].isEnabled()) {
+                        aux = (Integer.parseInt(questionsView.cells[i][j].getText())) * 2;
+                        questionsView.cells[i][j].setText(String.valueOf(aux));
+                    }
+                }
+            }
         }
     }
 }

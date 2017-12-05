@@ -52,7 +52,7 @@ public class QuestionsView extends JFrame {
         player1Board.setLayout(new BorderLayout());
         player2Board.setLayout(new BorderLayout());
 
-        player1Board.setBackground(Color.WHITE);
+        player1Board.setBackground(Color.GREEN);
         player2Board.setBackground(Color.WHITE);
 
         player1Board.add(player1);

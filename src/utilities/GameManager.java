@@ -25,6 +25,13 @@ public class GameManager {
         }
     }
 
+    public boolean doubleRound() {
+        if (getTurn() > 9) {
+            return true;
+        }
+        return false;
+    }
+
     public int getTurn() {
         return turn;
     }

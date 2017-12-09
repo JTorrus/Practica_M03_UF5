@@ -16,25 +16,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class QuestionsViewController implements ActionListener {
     private QuestionsView view;
     private Player p1;
     private Player p2;
-    private AnswersViewController answersViewController;
     private Player player;
-    private HashMap categories = new HashMap<String, HashMap>();
+    private HashMap<String, TreeMap> categories = new HashMap<String, TreeMap>();
+    private AnswersViewController answersViewController;
     private GameManager gameManager;
 
     public QuestionsViewController(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
         this.view = new QuestionsView(p1, p2);
-        gameManager = new GameManager(p1, p2);
+        gameManager = new GameManager(p1, p2, this);
 
         for (int i = 0; i < view.cells.length; i++) {
             for (int j = 0; j < view.cells[i].length; j++) {
@@ -43,6 +40,7 @@ public class QuestionsViewController implements ActionListener {
         }
 
         loadData();
+        setDataToButtons();
     }
 
     @Override
@@ -115,9 +113,10 @@ public class QuestionsViewController implements ActionListener {
                         }
                     }
                     c.setQuestions(aux);
-                    HashMap questions = new HashMap<Question, ArrayList<Answer>>();
+                    TreeMap questions = new TreeMap<Integer, Question>();
                     for (int j = 0; j < c.getQuestions().size(); j++) {
-                        questions.put(c.getQuestions().get(j), c.getQuestions().get(j).getAnswers());
+                        System.out.println(c.getQuestions().get(j).getPts());
+                        questions.put(c.getQuestions().get(j).getPts(), c.getQuestions().get(j));
                     }
 
                     categories.put(c.getName(), questions);
@@ -126,59 +125,48 @@ public class QuestionsViewController implements ActionListener {
             }
 
 
-            Iterator it;
-            for (int i = 0; i < view.cells.length; i++) {
-                it = categories.entrySet().iterator();
-                while (it.hasNext()) {
-                    for (int j = 0; j < view.cells[i].length; j++) {
-                        HashMap.Entry e = (HashMap.Entry) it.next();
-                        Iterator secondMap = ((HashMap) e.getValue()).entrySet().iterator();
-                        while (secondMap.hasNext()) {
-                            HashMap.Entry e2 = (HashMap.Entry) secondMap.next();
-                            switch (i) {
-                                case 0:
-                                    view.cells[i][j].setText((String) e.getKey());
-                                    break;
-                                case 1:
-                                    Question c = c = (Question) e2.getKey();
-                                    if (c.getPts() == (i * 100)) {
-                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
-                                    }
-                                    break;
-                                case 2:
-                                    c = (Question) e2.getKey();
-                                    if (c.getPts() == (i * 100)) {
-                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
-                                    }
-                                    break;
-                                case 3:
-                                    c = (Question) e2.getKey();
-                                    if (c.getPts() == (i * 100)) {
-                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
-                                    }
-                                    break;
-                                case 4:
-                                    c = (Question) e2.getKey();
-                                    if (c.getPts() == (i * 100)) {
-                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
-                                    }
-                                    break;
-                                case 5:
-                                    c = (Question) e2.getKey();
-                                    if (c.getPts() == (i * 100)) {
-                                        view.cells[i][j].setText(String.valueOf(c.getPts()));
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
+    }
+
+    public void setDataToButtons() {
+        ArrayList nameCategories = new ArrayList<String>();
+        ArrayList price = new ArrayList<Integer>();
+        for (Map.Entry<String, TreeMap> elem : categories.entrySet()) {
+            String key = elem.getKey();
+            nameCategories.add(key);
+            TreeMap<Integer, Question> value = elem.getValue();
+            for (Map.Entry<Integer, Question> child : value.entrySet()) {
+                int childKey = child.getKey();
+                price.add(childKey);
+            }
+        }
+
+
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < view.cells[i].length; j++) {
+                view.cells[i][j].setText((String) nameCategories.get(j));
+            }
+        }
+
+        for (int i = 0; i < view.cells.length; i++) {
+            for (int j = 1; j < view.cells[i].length; j++) {
+                view.cells[j][i].setText(String.valueOf(price.get(j - 1)));
+            }
+        }
+    }
+
+    public void setDataToButtonsDouble() {
+        // ---
     }
 
     public void printPositivePts() {

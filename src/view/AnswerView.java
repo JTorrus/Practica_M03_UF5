@@ -22,7 +22,7 @@ public class AnswerView extends JFrame {
         answers = new JPanel(new GridLayout(3, 1));
         question = new JPanel(new BorderLayout());
         questionText = new JLabel();
-        questionText.setFont(new Font("Courier New", Font.BOLD, 16));
+        questionText.setFont(new Font("Arial", Font.BOLD, 16));
         questionText.setForeground(Color.WHITE);
         question.setBackground(Color.BLUE);
 
@@ -32,15 +32,15 @@ public class AnswerView extends JFrame {
 
         res1.setBackground(Color.WHITE);
         res1.setForeground(Color.BLACK);
-        res1.setFont(new Font("Courier New", Font.BOLD, 18));
+        res1.setFont(new Font("Arial", Font.BOLD, 18));
 
         res2.setBackground(Color.WHITE);
         res2.setForeground(Color.BLACK);
-        res2.setFont(new Font("Courier New", Font.BOLD, 18));
+        res2.setFont(new Font("Arial", Font.BOLD, 18));
 
         res3.setBackground(Color.WHITE);
         res3.setForeground(Color.BLACK);
-        res3.setFont(new Font("Courier New", Font.BOLD, 18));
+        res3.setFont(new Font("Arial", Font.BOLD, 18));
 
         answers.setPreferredSize(new Dimension(1200,100));
         questionText.setPreferredSize(new Dimension(720, 75));

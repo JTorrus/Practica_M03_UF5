@@ -14,20 +14,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AnswersViewController implements ActionListener {
-    public ArrayList<Answer> answers;
-    private QuestionsViewController questionsViewController;
+    private ArrayList<Answer> answers;
     public Question question;
+    private QuestionsViewController questionsViewController;
     private AnswerView view;
     private GameManager gameManager;
     private int posX, posY;
     private JButton[][] cells;
-    private HashMap<String, HashMap> categories;
+    private HashMap<String, TreeMap<Integer, Question>> categories;
 
     public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, GameManager gameManager, QuestionsViewController questionsViewController) {
-        this.questionsViewController = questionsViewController;
         this.view = new AnswerView();
+        this.questionsViewController = questionsViewController;
         this.categories = categories;
         this.cells = cells;
         this.posX = posX;
@@ -43,22 +44,22 @@ public class AnswersViewController implements ActionListener {
     }
 
     public void detectQuestion() {
-        for (Map.Entry<String, HashMap> elem : categories.entrySet()) {
+        for (Map.Entry<String, TreeMap<Integer, Question>> elem : categories.entrySet()) {
             String key = elem.getKey();
-            HashMap<Question, ArrayList<Answer>> value = elem.getValue();
+            TreeMap<Integer, Question> value = elem.getValue();
             if (cells[0][posY].getText().equals(key)) {
-                for (Map.Entry<Question, ArrayList<Answer>> child : value.entrySet()) {
-                    Question childKey = child.getKey();
-                    ArrayList<Answer> childValue = child.getValue();
+                for (Map.Entry<Integer, Question> child : value.entrySet()) {
+                    int childKey = child.getKey();
+                    Question childValue = child.getValue();
 
-                    if (childKey.getPts() == Integer.valueOf(cells[posX][posY].getText())) {
-                        view.questionText.setText(childKey.getText());
-                        view.res1.setText(childValue.get(0).getText());
-                        view.res2.setText(childValue.get(1).getText());
-                        view.res3.setText(childValue.get(2).getText());
+                    if (childKey == Integer.valueOf(cells[posX][posY].getText())) {
+                        view.questionText.setText(childValue.getText());
+                        view.res1.setText(childValue.getAnswers().get(0).getText());
+                        view.res2.setText(childValue.getAnswers().get(1).getText());
+                        view.res3.setText(childValue.getAnswers().get(2).getText());
 
-                        answers = childValue;
-                        question = childKey;
+                        answers = childValue.getAnswers();
+                        question = childValue;
                     }
                 }
             }

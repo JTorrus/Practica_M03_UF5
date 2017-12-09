@@ -11,7 +11,7 @@ public class AnswerView extends JFrame {
 
     public AnswerView() {
         this.setTitle("Answer this question");
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         addComponentsToPane(this.getContentPane());
         this.pack();

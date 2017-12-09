@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class QuestionsViewController implements ActionListener {
-    private QuestionsView view;
+    public QuestionsView view;
     private Player p1;
     private Player p2;
     private Player player;
@@ -53,6 +53,7 @@ public class QuestionsViewController implements ActionListener {
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
                     System.out.println(posX + " " + posY);
+                    view.setEnabled(false);
                     answersViewController = new AnswersViewController(categories, view.cells, posX, posY, gameManager, this);
                 }
             }

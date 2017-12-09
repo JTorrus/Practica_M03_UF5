@@ -11,10 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.Timer;
 
 public class AnswersViewController implements ActionListener {
     private ArrayList<Answer> answers;
@@ -154,5 +152,12 @@ public class AnswersViewController implements ActionListener {
             }
             questionsViewController.printTurns();
         }
+
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                questionsViewController.view.setEnabled(true);
+                view.dispose();
+            }
+        }, 2000);
     }
 }

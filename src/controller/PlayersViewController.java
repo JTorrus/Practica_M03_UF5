@@ -3,6 +3,7 @@ package controller;
 import model.Player;
 import view.PlayersView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,8 +24,12 @@ public class PlayersViewController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         Player p1 = new Player(view.nameOne.getText());
         Player p2 = new Player(view.nameTwo.getText());
-        QuestionsViewController c = new QuestionsViewController(p1, p2);
-        view.dispose();
+        if (!p1.getName().equals(p2.getName())) {
+            QuestionsViewController c = new QuestionsViewController(p1, p2);
+            view.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Los nombres de los jugadores no pueden ser iguales");
+        }
     }
 
     @Override

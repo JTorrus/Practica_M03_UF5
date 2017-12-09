@@ -11,6 +11,7 @@ public class PlayersView extends JFrame {
 
     public PlayersView (){
         this.setTitle("Antes de empezar...");
+        this.setResizable(false);
         this.setLayout(new GridBagLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentsToPane(this.getContentPane());

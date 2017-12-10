@@ -68,7 +68,6 @@ public class AnswersViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.res1) {
             for (Answer answer : answers) {
-                System.out.println(answer.getText());
                 if (answer.getText().equals(view.res1.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res1.setBackground(Color.GREEN);
@@ -96,7 +95,6 @@ public class AnswersViewController implements ActionListener {
 
         } else if (e.getSource() == view.res2) {
             for (Answer answer : answers) {
-                System.out.println(answer.getText());
                 if (answer.getText().equals(view.res2.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res2.setBackground(Color.GREEN);
@@ -125,7 +123,6 @@ public class AnswersViewController implements ActionListener {
 
         } else if (e.getSource() == view.res3) {
             for (Answer answer : answers) {
-                System.out.println(answer.getText());
                 if (answer.getText().equals(view.res3.getText())) {
                     if (answer.isCorrectAnswer()) {
                         view.res3.setBackground(Color.GREEN);

@@ -53,7 +53,6 @@ public class QuestionsViewController implements ActionListener {
                     int posY = j;
                     view.cells[i][j].setEnabled(false);
                     view.cells[i][j].setBackground(Color.BLACK);
-                    System.out.println(posX + " " + posY);
                     view.setEnabled(false);
                     answersViewController = new AnswersViewController(categories, view.cells, posX, posY, gameManager, this);
                 }
@@ -117,7 +116,6 @@ public class QuestionsViewController implements ActionListener {
                     c.setQuestions(aux);
                     TreeMap questions = new TreeMap<Integer, Question>();
                     for (int j = 0; j < c.getQuestions().size(); j++) {
-                        System.out.println(c.getQuestions().get(j).getPts());
                         questions.put(c.getQuestions().get(j).getPts(), c.getQuestions().get(j));
                     }
 

@@ -8,7 +8,7 @@ public class GameManager {
     private Player player2;
     private int turn;
     private QuestionsViewController qvc;
-    private final int DOUBLE_ROUND = 5;
+    private final int DOUBLE_ROUND = 20;
 
 
 
@@ -21,7 +21,6 @@ public class GameManager {
 
     public void nextTurn() {
         this.turn++;
-        System.out.println(this.turn);
     }
 
     public Player actualPlayer(int turn) {

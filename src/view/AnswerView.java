@@ -10,7 +10,7 @@ public class AnswerView extends JFrame {
     public JButton res1, res2, res3;
 
     public AnswerView() {
-        this.setTitle("Answer this question");
+        this.setTitle("Responde la pregunta");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         addComponentsToPane(this.getContentPane());

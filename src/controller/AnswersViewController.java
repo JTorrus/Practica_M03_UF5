@@ -92,7 +92,6 @@ public class AnswersViewController implements ActionListener {
                     }
                 }
             }
-
             questionsViewController.printTurns();
 
         } else if (e.getSource() == view.res2) {
@@ -159,5 +158,6 @@ public class AnswersViewController implements ActionListener {
                 view.dispose();
             }
         }, 2000);
+        questionsViewController.setDataToButtonsDouble();
     }
 }

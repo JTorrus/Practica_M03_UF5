@@ -22,10 +22,6 @@ public class GameManager {
     public void nextTurn() {
         this.turn++;
         System.out.println(this.turn);
-        if (this.turn == DOUBLE_ROUND){
-            this.qvc.setDataToButtonsDouble();
-        }
-
     }
 
     public Player actualPlayer(int turn) {
@@ -37,7 +33,7 @@ public class GameManager {
     }
 
     public boolean doubleRound() {
-        if (getTurn() > 9) {
+        if (this.turn == DOUBLE_ROUND) {
             return true;
         }
         return false;

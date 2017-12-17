@@ -9,14 +9,6 @@ public class PlayersView extends JFrame {
     private JTextField nameOne,nameTwo;
     private JButton start,exit;
 
-    public JLabel getPlayerOne() {
-        return playerOne;
-    }
-
-    public JLabel getPlayerTwo() {
-        return playerTwo;
-    }
-
     public JTextField getNameOne() {
         return nameOne;
     }

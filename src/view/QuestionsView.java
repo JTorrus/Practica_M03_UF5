@@ -13,7 +13,7 @@ public class QuestionsView extends JFrame {
     private JPanel player1Board;
     private JPanel player2Board;
     private JSplitPane playersInfo;
-    private JLabel player1, player2, player1Pts, player2Pts, aux;
+    private JLabel player1, player2, player1Pts, player2Pts;
     private Player p1, p2;
 
     public JButton[][] getCells() {
@@ -28,32 +28,12 @@ public class QuestionsView extends JFrame {
         return player2Board;
     }
 
-    public JLabel getPlayer1() {
-        return player1;
-    }
-
-    public JLabel getPlayer2() {
-        return player2;
-    }
-
     public JLabel getPlayer1Pts() {
         return player1Pts;
     }
 
     public JLabel getPlayer2Pts() {
         return player2Pts;
-    }
-
-    public JLabel getAux() {
-        return aux;
-    }
-
-    public Player getP1() {
-        return p1;
-    }
-
-    public Player getP2() {
-        return p2;
     }
 
     public QuestionsView(Player p1, Player p2) {

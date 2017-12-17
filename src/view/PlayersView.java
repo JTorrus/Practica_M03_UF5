@@ -16,6 +16,7 @@ public class PlayersView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentsToPane(this.getContentPane());
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

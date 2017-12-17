@@ -129,7 +129,9 @@ public class QuestionsViewController implements ActionListener {
             e.printStackTrace();
         } finally {
             try {
-                br.close();
+                if (br != null) {
+                    br.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -160,7 +162,7 @@ public class QuestionsViewController implements ActionListener {
 
         for (int i = 0; i < view.cells.length; i++) {
             for (int j = 1; j < view.cells[i].length; j++) {
-                if (view.cells[j][i].isEnabled()){
+                if (view.cells[j][i].isEnabled()) {
                     view.cells[j][i].setText(String.valueOf(price.get(j - 1)));
                 }
 
@@ -169,26 +171,26 @@ public class QuestionsViewController implements ActionListener {
     }
 
     public void setDataToButtonsDouble() {
-        if (gameManager.doubleRound()){
+        if (gameManager.doubleRound()) {
             int count = 0;
             Iterator it;
             it = categories.entrySet().iterator();
             ArrayList doublePrice = new ArrayList<TreeMap>();
-            while(it.hasNext()){
+            while (it.hasNext()) {
                 HashMap.Entry e = (HashMap.Entry) it.next();
                 Iterator secondMap = ((TreeMap) e.getValue()).entrySet().iterator();
                 TreeMap tm = new TreeMap();
                 while (secondMap.hasNext()) {
                     Map.Entry e2 = (Map.Entry) secondMap.next();
                     Question qt = (Question) e2.getValue();
-                    qt.setPts(qt.getPts()*2);
-                    tm.put((Integer)e2.getKey()*2,qt);
+                    qt.setPts(qt.getPts() * 2);
+                    tm.put((Integer) e2.getKey() * 2, qt);
                 }
                 doublePrice.add(tm);
             }
 
             it = categories.entrySet().iterator();
-            while(it.hasNext()){
+            while (it.hasNext()) {
                 HashMap.Entry e = (HashMap.Entry) it.next();
                 e.setValue(doublePrice.get(count));
                 count++;

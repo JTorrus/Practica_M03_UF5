@@ -9,6 +9,7 @@ public class GameManager {
     private int turn;
     private QuestionsViewController qvc;
     private final int DOUBLE_ROUND = 20;
+    private final int END_GAME = 30;
 
 
 
@@ -32,10 +33,11 @@ public class GameManager {
     }
 
     public boolean doubleRound() {
-        if (this.turn == DOUBLE_ROUND) {
-            return true;
-        }
-        return false;
+        return this.turn == DOUBLE_ROUND;
+    }
+
+    public boolean endOfGame() {
+        return this.turn == END_GAME;
     }
 
     public int getTurn() {

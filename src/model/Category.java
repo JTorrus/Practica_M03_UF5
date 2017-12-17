@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Category {
     private String name;
-    ArrayList<Question> questions;
+    private ArrayList<Question> questions;
 
     public String getName() {
         return name;

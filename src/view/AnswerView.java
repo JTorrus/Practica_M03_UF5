@@ -15,6 +15,7 @@ public class AnswerView extends JFrame {
         this.setResizable(false);
         addComponentsToPane(this.getContentPane());
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

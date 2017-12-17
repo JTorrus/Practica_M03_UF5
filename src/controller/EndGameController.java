@@ -14,21 +14,21 @@ public class EndGameController implements ActionListener {
         this.p1 = p1;
         this.p2 = p2;
         this.view = new EndGameView(p1, p2);
-        this.view.bClose.addActionListener(this);
+        this.view.getbClose().addActionListener(this);
         setWinner();
     }
 
     public void setWinner() {
         if (p1.getPts() > p2.getPts()) {
-            view.pwinner.setText(p1.getName());
+            view.getPwinner().setText(p1.getName());
         } else {
-            view.pwinner.setText(p2.getName());
+            view.getPwinner().setText(p2.getName());
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.bClose) {
+        if (e.getSource() == view.getbClose()) {
             view.dispose();
         }
     }

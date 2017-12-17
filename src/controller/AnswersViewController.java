@@ -16,15 +16,18 @@ import java.util.Timer;
 
 public class AnswersViewController implements ActionListener {
     private ArrayList<Answer> answers;
-    public Question question;
+    private Question question;
     private QuestionsViewController questionsViewController;
     private AnswerView view;
-    private GameManager gameManager;
     private int posX, posY;
     private JButton[][] cells;
     private HashMap<String, TreeMap<Integer, Question>> categories;
 
-    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, GameManager gameManager, QuestionsViewController questionsViewController) {
+    public Question getQuestion() {
+        return question;
+    }
+
+    public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, QuestionsViewController questionsViewController) {
         this.view = new AnswerView();
         this.questionsViewController = questionsViewController;
         this.categories = categories;
@@ -33,11 +36,10 @@ public class AnswersViewController implements ActionListener {
         this.posY = posY;
         answers = new ArrayList<>();
         question = new Question();
-        this.gameManager = gameManager;
         view.setVisible(true);
-        view.res1.addActionListener(this);
-        view.res2.addActionListener(this);
-        view.res3.addActionListener(this);
+        view.getRes1().addActionListener(this);
+        view.getRes2().addActionListener(this);
+        view.getRes3().addActionListener(this);
         detectQuestion();
     }
 
@@ -51,10 +53,10 @@ public class AnswersViewController implements ActionListener {
                     Question childValue = child.getValue();
 
                     if (childKey == Integer.valueOf(cells[posX][posY].getText())) {
-                        view.questionText.setText(childValue.getText());
-                        view.res1.setText(childValue.getAnswers().get(0).getText());
-                        view.res2.setText(childValue.getAnswers().get(1).getText());
-                        view.res3.setText(childValue.getAnswers().get(2).getText());
+                        view.getQuestionText().setText(childValue.getText());
+                        view.getRes1().setText(childValue.getAnswers().get(0).getText());
+                        view.getRes2().setText(childValue.getAnswers().get(1).getText());
+                        view.getRes3().setText(childValue.getAnswers().get(2).getText());
 
                         answers = childValue.getAnswers();
                         question = childValue;
@@ -66,24 +68,24 @@ public class AnswersViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.res1) {
+        if (e.getSource() == view.getRes1()) {
             for (Answer answer : answers) {
-                if (answer.getText().equals(view.res1.getText())) {
+                if (answer.getText().equals(view.getRes1().getText())) {
                     if (answer.isCorrectAnswer()) {
-                        view.res1.setBackground(Color.GREEN);
-                        view.res2.setEnabled(false);
-                        view.res3.setEnabled(false);
+                        view.getRes1().setBackground(Color.GREEN);
+                        view.getRes2().setEnabled(false);
+                        view.getRes3().setEnabled(false);
                         questionsViewController.printPositivePts();
                     } else {
-                        view.res1.setBackground(Color.RED);
+                        view.getRes1().setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
                             if (correctAnswer.isCorrectAnswer()) {
-                                if (correctAnswer.getText().equals(view.res2.getText())) {
-                                    view.res2.setBackground(Color.GREEN);
-                                    view.res3.setBackground(Color.RED);
-                                } else if (correctAnswer.getText().equals(view.res3.getText())) {
-                                    view.res2.setBackground(Color.RED);
-                                    view.res3.setBackground(Color.GREEN);
+                                if (correctAnswer.getText().equals(view.getRes2().getText())) {
+                                    view.getRes2().setBackground(Color.GREEN);
+                                    view.getRes3().setBackground(Color.RED);
+                                } else if (correctAnswer.getText().equals(view.getRes3().getText())) {
+                                    view.getRes2().setBackground(Color.RED);
+                                    view.getRes3().setBackground(Color.GREEN);
                                 }
                             }
                         }
@@ -93,24 +95,24 @@ public class AnswersViewController implements ActionListener {
             }
             questionsViewController.printTurns();
 
-        } else if (e.getSource() == view.res2) {
+        } else if (e.getSource() == view.getRes2()) {
             for (Answer answer : answers) {
-                if (answer.getText().equals(view.res2.getText())) {
+                if (answer.getText().equals(view.getRes2().getText())) {
                     if (answer.isCorrectAnswer()) {
-                        view.res2.setBackground(Color.GREEN);
-                        view.res1.setEnabled(false);
-                        view.res3.setEnabled(false);
+                        view.getRes2().setBackground(Color.GREEN);
+                        view.getRes1().setEnabled(false);
+                        view.getRes3().setEnabled(false);
                         questionsViewController.printPositivePts();
                     } else {
-                        view.res2.setBackground(Color.RED);
+                        view.getRes2().setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
                             if (correctAnswer.isCorrectAnswer()) {
-                                if (correctAnswer.getText().equals(view.res1.getText())) {
-                                    view.res1.setBackground(Color.GREEN);
-                                    view.res3.setBackground(Color.RED);
-                                } else if (correctAnswer.getText().equals(view.res3.getText())) {
-                                    view.res1.setBackground(Color.RED);
-                                    view.res3.setBackground(Color.GREEN);
+                                if (correctAnswer.getText().equals(view.getRes1().getText())) {
+                                    view.getRes1().setBackground(Color.GREEN);
+                                    view.getRes3().setBackground(Color.RED);
+                                } else if (correctAnswer.getText().equals(view.getRes3().getText())) {
+                                    view.getRes1().setBackground(Color.RED);
+                                    view.getRes3().setBackground(Color.GREEN);
                                 }
                             }
                         }
@@ -121,24 +123,24 @@ public class AnswersViewController implements ActionListener {
 
             questionsViewController.printTurns();
 
-        } else if (e.getSource() == view.res3) {
+        } else if (e.getSource() == view.getRes3()) {
             for (Answer answer : answers) {
-                if (answer.getText().equals(view.res3.getText())) {
+                if (answer.getText().equals(view.getRes3().getText())) {
                     if (answer.isCorrectAnswer()) {
-                        view.res3.setBackground(Color.GREEN);
-                        view.res1.setEnabled(false);
-                        view.res2.setEnabled(false);
+                        view.getRes3().setBackground(Color.GREEN);
+                        view.getRes1().setEnabled(false);
+                        view.getRes2().setEnabled(false);
                         questionsViewController.printPositivePts();
                     } else {
-                        view.res3.setBackground(Color.RED);
+                        view.getRes3().setBackground(Color.RED);
                         for (Answer correctAnswer : answers) {
                             if (correctAnswer.isCorrectAnswer()) {
-                                if (correctAnswer.getText().equals(view.res1.getText())) {
-                                    view.res1.setBackground(Color.GREEN);
-                                    view.res2.setBackground(Color.RED);
-                                } else if (correctAnswer.getText().equals(view.res2.getText())) {
-                                    view.res1.setBackground(Color.RED);
-                                    view.res2.setBackground(Color.GREEN);
+                                if (correctAnswer.getText().equals(view.getRes1().getText())) {
+                                    view.getRes1().setBackground(Color.GREEN);
+                                    view.getRes2().setBackground(Color.RED);
+                                } else if (correctAnswer.getText().equals(view.getRes2().getText())) {
+                                    view.getRes1().setBackground(Color.RED);
+                                    view.getRes2().setBackground(Color.GREEN);
                                 }
                             }
                         }
@@ -151,7 +153,7 @@ public class AnswersViewController implements ActionListener {
 
         new Timer().schedule(new TimerTask() {
             public void run() {
-                questionsViewController.view.setEnabled(true);
+                questionsViewController.getView().setEnabled(true);
                 view.dispose();
             }
         }, 2000);

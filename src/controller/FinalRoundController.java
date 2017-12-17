@@ -34,10 +34,10 @@ public class FinalRoundController implements ActionListener {
             this.p1 = p1;
             this.p2 = p2;
             this.player = finalPlayerTurn(controlTurn);
-            this.view.res1.addActionListener(this);
-            this.view.res2.addActionListener(this);
-            this.view.res3.addActionListener(this);
-            view.actualPlayer.setText("TURNO DE " + player.getName());
+            this.view.getRes1().addActionListener(this);
+            this.view.getRes2().addActionListener(this);
+            this.view.getRes3().addActionListener(this);
+            view.getActualPlayer().setText("TURNO DE " + player.getName());
             loadFinalData();
             setQuestions();
         }
@@ -45,12 +45,12 @@ public class FinalRoundController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        view.actualPlayer.setText("TURNO DE " + player.getName());
+        view.getActualPlayer().setText("TURNO DE " + player.getName());
         Question actualQuestion = (Question) questions.get(controlTurn);
 
-        if (e.getSource() == this.view.res1) {
+        if (e.getSource() == this.view.getRes1()) {
             for (Answer cAns : actualQuestion.getAnswers()) {
-                if (view.res1.getText().equals(cAns.getText())) {
+                if (view.getRes1().getText().equals(cAns.getText())) {
                     if (cAns.isCorrectAnswer()) {
                         controlTurn++;
                         player = finalPlayerTurn(controlTurn);
@@ -67,9 +67,9 @@ public class FinalRoundController implements ActionListener {
             }
         }
 
-        if (e.getSource() == this.view.res2) {
+        if (e.getSource() == this.view.getRes2()) {
             for (Answer cAns : actualQuestion.getAnswers()) {
-                if (view.res2.getText().equals(cAns.getText())) {
+                if (view.getRes2().getText().equals(cAns.getText())) {
                     if (cAns.isCorrectAnswer()) {
                         controlTurn++;
                         player = finalPlayerTurn(controlTurn);
@@ -87,9 +87,9 @@ public class FinalRoundController implements ActionListener {
             }
         }
 
-        if (e.getSource() == this.view.res3) {
+        if (e.getSource() == this.view.getRes3()) {
             for (Answer cAns : actualQuestion.getAnswers()) {
-                if (view.res3.getText().equals(cAns.getText())) {
+                if (view.getRes3().getText().equals(cAns.getText())) {
                     if (cAns.isCorrectAnswer()) {
                         controlTurn++;
                         player = finalPlayerTurn(controlTurn);
@@ -163,10 +163,10 @@ public class FinalRoundController implements ActionListener {
 
     public void setQuestions() throws ArrayIndexOutOfBoundsException {
         Question actualQuestion = (Question) questions.get(controlTurn);
-        view.questionText.setText(actualQuestion.getText());
-        view.res1.setText(actualQuestion.getAnswers().get(0).getText());
-        view.res2.setText(actualQuestion.getAnswers().get(1).getText());
-        view.res3.setText(actualQuestion.getAnswers().get(2).getText());
+        view.getQuestionText().setText(actualQuestion.getText());
+        view.getRes1().setText(actualQuestion.getAnswers().get(0).getText());
+        view.getRes2().setText(actualQuestion.getAnswers().get(1).getText());
+        view.getRes3().setText(actualQuestion.getAnswers().get(2).getText());
     }
 
 }

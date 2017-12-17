@@ -9,12 +9,52 @@ import java.awt.*;
 import static java.awt.Color.green;
 
 public class QuestionsView extends JFrame {
-    public JButton[][] cells;
-    public JPanel player1Board;
-    public JPanel player2Board;
+    private JButton[][] cells;
+    private JPanel player1Board;
+    private JPanel player2Board;
     private JSplitPane playersInfo;
-    public JLabel player1, player2, player1Pts, player2Pts, aux;
-    public Player p1, p2;
+    private JLabel player1, player2, player1Pts, player2Pts, aux;
+    private Player p1, p2;
+
+    public JButton[][] getCells() {
+        return cells;
+    }
+
+    public JPanel getPlayer1Board() {
+        return player1Board;
+    }
+
+    public JPanel getPlayer2Board() {
+        return player2Board;
+    }
+
+    public JLabel getPlayer1() {
+        return player1;
+    }
+
+    public JLabel getPlayer2() {
+        return player2;
+    }
+
+    public JLabel getPlayer1Pts() {
+        return player1Pts;
+    }
+
+    public JLabel getPlayer2Pts() {
+        return player2Pts;
+    }
+
+    public JLabel getAux() {
+        return aux;
+    }
+
+    public Player getP1() {
+        return p1;
+    }
+
+    public Player getP2() {
+        return p2;
+    }
 
     public QuestionsView(Player p1, Player p2) {
         this.p1 = p1;

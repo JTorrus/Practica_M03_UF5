@@ -5,9 +5,33 @@ import java.awt.*;
 
 public class PlayersView extends JFrame {
 
-    public JLabel playerOne,playerTwo;
-    public JTextField nameOne,nameTwo;
-    public JButton start,exit;
+    private JLabel playerOne,playerTwo;
+    private JTextField nameOne,nameTwo;
+    private JButton start,exit;
+
+    public JLabel getPlayerOne() {
+        return playerOne;
+    }
+
+    public JLabel getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public JTextField getNameOne() {
+        return nameOne;
+    }
+
+    public JTextField getNameTwo() {
+        return nameTwo;
+    }
+
+    public JButton getStart() {
+        return start;
+    }
+
+    public JButton getExit() {
+        return exit;
+    }
 
     public PlayersView (){
         this.setTitle("Antes de empezar...");

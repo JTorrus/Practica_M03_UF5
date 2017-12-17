@@ -5,11 +5,47 @@ import model.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class EndGameView extends JFrame{
+public class EndGameView extends JFrame {
 
-    public JLabel p1name,p2name,p1pts,p2pts,winner,pwinner;
-    public Player p1,p2;
-    public JButton bClose;
+    private JLabel p1name, p2name, p1pts, p2pts, winner, pwinner;
+    private Player p1, p2;
+    private JButton bClose;
+
+    public JLabel getP1name() {
+        return p1name;
+    }
+
+    public JLabel getP2name() {
+        return p2name;
+    }
+
+    public JLabel getP1pts() {
+        return p1pts;
+    }
+
+    public JLabel getP2pts() {
+        return p2pts;
+    }
+
+    public JLabel getWinner() {
+        return winner;
+    }
+
+    public JLabel getPwinner() {
+        return pwinner;
+    }
+
+    public Player getP1() {
+        return p1;
+    }
+
+    public Player getP2() {
+        return p2;
+    }
+
+    public JButton getbClose() {
+        return bClose;
+    }
 
     public EndGameView(Player p1, Player p2) {
         this.p1 = p1;
@@ -24,7 +60,7 @@ public class EndGameView extends JFrame{
     }
 
     private void addComponentsToPane(Container pane) {
-        this.setSize(new Dimension(800,200));
+        this.setSize(new Dimension(800, 200));
         p1name = new JLabel(p1.getName());
         p1pts = new JLabel(String.valueOf(p1.getPts()));
         p2name = new JLabel(p2.getName());

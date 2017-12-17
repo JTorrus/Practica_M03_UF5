@@ -14,20 +14,20 @@ public class PlayersViewController implements ActionListener, KeyListener {
 
     public PlayersViewController() {
         this.view = new PlayersView();
-        this.view.start.setEnabled(false);
-        this.view.start.addActionListener(this);
-        this.view.exit.addActionListener(this);
-        this.view.nameOne.addKeyListener(this);
-        this.view.nameTwo.addKeyListener(this);
+        this.view.getStart().setEnabled(false);
+        this.view.getStart().addActionListener(this);
+        this.view.getExit().addActionListener(this);
+        this.view.getNameOne().addKeyListener(this);
+        this.view.getNameTwo().addKeyListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        Player p1 = new Player(view.nameOne.getText());
-        Player p2 = new Player(view.nameTwo.getText());
+        Player p1 = new Player(view.getNameOne().getText());
+        Player p2 = new Player(view.getNameTwo().getText());
 
-        if (e.getSource() == this.view.start) {
+        if (e.getSource() == this.view.getStart()) {
             if (!p1.getName().equals(p2.getName())) {
-                QuestionsViewController c = new QuestionsViewController(p1, p2);
+                new QuestionsViewController(p1, p2);
                 view.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Los nombres de los jugadores no pueden ser iguales");
@@ -40,28 +40,28 @@ public class PlayersViewController implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (this.view.nameOne.getText().length() > 0 && this.view.nameTwo.getText().length() > 0) {
-            this.view.start.setEnabled(true);
+        if (this.view.getNameOne().getText().length() > 0 && this.view.getNameTwo().getText().length() > 0) {
+            this.view.getStart().setEnabled(true);
         } else {
-            this.view.start.setEnabled(false);
+            this.view.getStart().setEnabled(false);
         }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (this.view.nameOne.getText().length() > 0 && this.view.nameTwo.getText().length() > 0) {
-            this.view.start.setEnabled(true);
+        if (this.view.getNameOne().getText().length() > 0 && this.view.getNameTwo().getText().length() > 0) {
+            this.view.getStart().setEnabled(true);
         } else {
-            this.view.start.setEnabled(false);
+            this.view.getStart().setEnabled(false);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (this.view.nameOne.getText().length() > 0 && this.view.nameTwo.getText().length() > 0) {
-            this.view.start.setEnabled(true);
+        if (this.view.getNameOne().getText().length() > 0 && this.view.getNameTwo().getText().length() > 0) {
+            this.view.getStart().setEnabled(true);
         } else {
-            this.view.start.setEnabled(false);
+            this.view.getStart().setEnabled(false);
         }
     }
 }

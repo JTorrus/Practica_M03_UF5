@@ -20,15 +20,17 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class QuestionsViewController implements ActionListener {
-    public QuestionsView view;
+    private QuestionsView view;
     private Player p1;
     private Player p2;
     private Player player;
     private HashMap<String, TreeMap> categories = new HashMap<String, TreeMap>();
     private AnswersViewController answersViewController;
-    private EndGameController endGameController;
-    private FinalRoundController finalRoundController;
     private GameManager gameManager;
+
+    public QuestionsView getView() {
+        return view;
+    }
 
     public QuestionsViewController(Player p1, Player p2) {
         this.p1 = p1;
@@ -36,9 +38,9 @@ public class QuestionsViewController implements ActionListener {
         this.view = new QuestionsView(p1, p2);
         gameManager = new GameManager(p1, p2, this);
 
-        for (int i = 0; i < view.cells.length; i++) {
-            for (int j = 0; j < view.cells[i].length; j++) {
-                this.view.cells[i][j].addActionListener(this);
+        for (int i = 0; i < view.getCells().length; i++) {
+            for (int j = 0; j < view.getCells()[i].length; j++) {
+                this.view.getCells()[i][j].addActionListener(this);
             }
         }
 
@@ -48,15 +50,15 @@ public class QuestionsViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < view.cells.length; i++) {
-            for (int j = 0; j < view.cells[i].length; j++) {
-                if (view.cells[i][j] == e.getSource()) {
+        for (int i = 0; i < view.getCells().length; i++) {
+            for (int j = 0; j < view.getCells()[i].length; j++) {
+                if (view.getCells()[i][j] == e.getSource()) {
                     int posX = i;
                     int posY = j;
-                    view.cells[i][j].setEnabled(false);
-                    view.cells[i][j].setBackground(Color.BLACK);
+                    view.getCells()[i][j].setEnabled(false);
+                    view.getCells()[i][j].setBackground(Color.BLACK);
                     view.setEnabled(false);
-                    answersViewController = new AnswersViewController(categories, view.cells, posX, posY, gameManager, this);
+                    answersViewController = new AnswersViewController(categories, view.getCells(), posX, posY, this);
                 }
             }
         }
@@ -157,15 +159,15 @@ public class QuestionsViewController implements ActionListener {
 
 
         for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < view.cells[i].length; j++) {
-                view.cells[i][j].setText((String) nameCategories.get(j));
+            for (int j = 0; j < view.getCells()[i].length; j++) {
+                view.getCells()[i][j].setText((String) nameCategories.get(j));
             }
         }
 
-        for (int i = 0; i < view.cells.length; i++) {
-            for (int j = 1; j < view.cells[i].length; j++) {
-                if (view.cells[j][i].isEnabled()) {
-                    view.cells[j][i].setText(String.valueOf(price.get(j - 1)));
+        for (int i = 0; i < view.getCells().length; i++) {
+            for (int j = 1; j < view.getCells()[i].length; j++) {
+                if (view.getCells()[j][i].isEnabled()) {
+                    view.getCells()[j][i].setText(String.valueOf(price.get(j - 1)));
                 }
 
             }
@@ -204,31 +206,31 @@ public class QuestionsViewController implements ActionListener {
 
     public void printPositivePts() {
         if (p1.getName().equals(player.getName())) {
-            player.setPts(answersViewController.question.getPts());
-            view.player1Pts.setText(String.valueOf(player.getPts()) + " PTS");
+            player.setPts(answersViewController.getQuestion().getPts());
+            view.getPlayer1Pts().setText(String.valueOf(player.getPts()) + " PTS");
         } else {
-            player.setPts(answersViewController.question.getPts());
-            view.player2Pts.setText(String.valueOf(player.getPts()) + " PTS");
+            player.setPts(answersViewController.getQuestion().getPts());
+            view.getPlayer2Pts().setText(String.valueOf(player.getPts()) + " PTS");
         }
     }
 
     public void printNegativePts() {
         if (p1.getName().equals(player.getName())) {
-            player.setNegativePts(answersViewController.question.getPts());
-            view.player1Pts.setText(String.valueOf(player.getPts()) + " PTS");
+            player.setNegativePts(answersViewController.getQuestion().getPts());
+            view.getPlayer1Pts().setText(String.valueOf(player.getPts()) + " PTS");
         } else {
-            player.setNegativePts(answersViewController.question.getPts());
-            view.player2Pts.setText(String.valueOf(player.getPts() + " PTS"));
+            player.setNegativePts(answersViewController.getQuestion().getPts());
+            view.getPlayer2Pts().setText(String.valueOf(player.getPts() + " PTS"));
         }
     }
 
     public void printTurns() {
         if (p1.getName().equals(player.getName())) {
-            view.player2Board.setBackground(Color.GREEN);
-            view.player1Board.setBackground(Color.WHITE);
+            view.getPlayer2Board().setBackground(Color.GREEN);
+            view.getPlayer1Board().setBackground(Color.WHITE);
         } else {
-            view.player2Board.setBackground(Color.WHITE);
-            view.player1Board.setBackground(Color.GREEN);
+            view.getPlayer2Board().setBackground(Color.WHITE);
+            view.getPlayer1Board().setBackground(Color.GREEN);
         }
     }
 
@@ -237,11 +239,11 @@ public class QuestionsViewController implements ActionListener {
             if (p1.getPts() == p2.getPts()) {
                 view.dispose();
                 JOptionPane.showMessageDialog(null, "Hay un empate! Empieza la Final Round");
-                finalRoundController = new FinalRoundController(p1, p2,0);
+                new FinalRoundController(p1, p2,0);
             } else {
                 view.dispose();
                 JOptionPane.showMessageDialog(null, "Partida Finalizada!");
-                endGameController = new EndGameController(p1, p2);
+                new EndGameController(p1, p2);
             }
 
         }

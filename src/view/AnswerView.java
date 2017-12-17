@@ -6,8 +6,25 @@ import java.util.ArrayList;
 
 public class AnswerView extends JFrame {
     private JPanel answers, question;
-    public JLabel questionText;
-    public JButton res1, res2, res3;
+    private JLabel questionText;
+
+    public JLabel getQuestionText() {
+        return questionText;
+    }
+
+    public JButton getRes1() {
+        return res1;
+    }
+
+    public JButton getRes2() {
+        return res2;
+    }
+
+    public JButton getRes3() {
+        return res3;
+    }
+
+    private JButton res1, res2, res3;
 
     public AnswerView() {
         this.setTitle("Responde la pregunta");

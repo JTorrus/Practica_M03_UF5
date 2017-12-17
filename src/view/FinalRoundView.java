@@ -6,9 +6,29 @@ import java.awt.*;
 public class FinalRoundView extends JFrame {
 
     private JPanel answers, question;
-    public JLabel questionText;
-    public JButton res1, res2, res3;
-    public JLabel actualPlayer;
+    private JLabel questionText;
+    private JButton res1, res2, res3;
+    private JLabel actualPlayer;
+
+    public JLabel getQuestionText() {
+        return questionText;
+    }
+
+    public JButton getRes1() {
+        return res1;
+    }
+
+    public JButton getRes2() {
+        return res2;
+    }
+
+    public JButton getRes3() {
+        return res3;
+    }
+
+    public JLabel getActualPlayer() {
+        return actualPlayer;
+    }
 
     public FinalRoundView() {
         this.setTitle("Responde la pregunta");

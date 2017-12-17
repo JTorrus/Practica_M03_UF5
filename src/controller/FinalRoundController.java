@@ -161,7 +161,7 @@ public class FinalRoundController implements ActionListener {
         }
     }
 
-    public void setQuestions() throws ArrayIndexOutOfBoundsException {
+    public void setQuestions() {
         Question actualQuestion = (Question) questions.get(controlTurn);
         view.getQuestionText().setText(actualQuestion.getText());
         view.getRes1().setText(actualQuestion.getAnswers().get(0).getText());

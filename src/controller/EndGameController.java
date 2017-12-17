@@ -5,6 +5,11 @@ import view.EndGameView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class EndGameController implements ActionListener {
     private EndGameView view;
@@ -19,10 +24,24 @@ public class EndGameController implements ActionListener {
     }
 
     public void setWinner() {
+        Path path = Paths.get("ActualWinner.txt");
+
         if (p1.getPts() > p2.getPts()) {
             view.getPwinner().setText(p1.getName());
+
+            try {
+                Files.write(path, view.getPwinner().getText().getBytes());
+            } catch (IOException e) {
+                System.out.println("No se ha podido escribir el fichero");
+            }
         } else {
             view.getPwinner().setText(p2.getName());
+
+            try {
+                Files.write(path, view.getPwinner().getText().getBytes());
+            } catch (IOException e) {
+                System.out.println("No se ha podido escribir el fichero");
+            }
         }
     }
 

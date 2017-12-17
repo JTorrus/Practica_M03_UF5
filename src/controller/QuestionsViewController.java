@@ -130,14 +130,14 @@ public class QuestionsViewController implements ActionListener {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("No se ha podido leer el fichero");
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error al cerrar BufferedReader");
             }
         }
 

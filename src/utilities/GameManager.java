@@ -9,7 +9,7 @@ public class GameManager {
     private int turn;
     private QuestionsViewController qvc;
     private final int DOUBLE_ROUND = 20;
-    private final int END_GAME = 30;
+    private final int END_GAME = 2;
 
     public GameManager(Player player1, Player player2, QuestionsViewController qvc) {
         this.player1 = player1;

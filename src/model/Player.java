@@ -17,10 +17,6 @@ public class Player {
         return pts;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setPts(int pts) {
         this.pts += pts;
     }

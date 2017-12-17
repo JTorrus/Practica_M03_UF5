@@ -26,6 +26,8 @@ public class QuestionsViewController implements ActionListener {
     private Player player;
     private HashMap<String, TreeMap> categories = new HashMap<String, TreeMap>();
     private AnswersViewController answersViewController;
+    private EndGameController endGameController;
+    private FinalRoundController finalRoundController;
     private GameManager gameManager;
 
     public QuestionsViewController(Player p1, Player p2) {
@@ -227,6 +229,21 @@ public class QuestionsViewController implements ActionListener {
         } else {
             view.player2Board.setBackground(Color.WHITE);
             view.player1Board.setBackground(Color.GREEN);
+        }
+    }
+
+    public void endOfGame() {
+        if (gameManager.endOfGame()) {
+            if (p1.getPts() == p2.getPts()) {
+                view.dispose();
+                JOptionPane.showMessageDialog(null, "Hay un empate! Empieza la Final Round");
+                finalRoundController = new FinalRoundController(p1, p2,0);
+            } else {
+                view.dispose();
+                JOptionPane.showMessageDialog(null, "Partida Finalizada!");
+                endGameController = new EndGameController(p1, p2);
+            }
+
         }
     }
 }

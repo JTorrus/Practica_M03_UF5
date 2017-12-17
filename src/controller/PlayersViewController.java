@@ -24,12 +24,18 @@ public class PlayersViewController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         Player p1 = new Player(view.nameOne.getText());
         Player p2 = new Player(view.nameTwo.getText());
-        if (!p1.getName().equals(p2.getName())) {
-            QuestionsViewController c = new QuestionsViewController(p1, p2);
-            view.dispose();
+
+        if (e.getSource() == this.view.start) {
+            if (!p1.getName().equals(p2.getName())) {
+                QuestionsViewController c = new QuestionsViewController(p1, p2);
+                view.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Los nombres de los jugadores no pueden ser iguales");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Los nombres de los jugadores no pueden ser iguales");
+            view.dispose();
         }
+
     }
 
     @Override

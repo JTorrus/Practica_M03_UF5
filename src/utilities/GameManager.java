@@ -11,8 +11,6 @@ public class GameManager {
     private final int DOUBLE_ROUND = 20;
     private final int END_GAME = 30;
 
-
-
     public GameManager(Player player1, Player player2, QuestionsViewController qvc) {
         this.player1 = player1;
         this.player2 = player2;

@@ -156,5 +156,6 @@ public class AnswersViewController implements ActionListener {
             }
         }, 2000);
         questionsViewController.setDataToButtonsDouble();
+        questionsViewController.endOfGame();
     }
 }

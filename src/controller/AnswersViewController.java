@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.Timer;
 
+
+// Controlador encargado de mostrar las respuestas al clicar sobre una pregunta, implementa la interfaz ActionListener para poder estar informados de cuando el usuario clica a una respuesta
 public class AnswersViewController implements ActionListener {
     private ArrayList<Answer> answers;
     private Question question;
@@ -27,6 +29,9 @@ public class AnswersViewController implements ActionListener {
         return question;
     }
 
+    /* En el constructor de la clase pasamos un HashMap que será el encargado de contener todos los datos del programa (categorías, preguntas y respuestas), una matriz de botones, las posiciones de
+    dicha matriz y el controlador de Preguntas que nos permitirá comunicarnos con él cuando lo necesitemos
+    */
     public AnswersViewController(HashMap categories, JButton[][] cells, int posX, int posY, QuestionsViewController questionsViewController) {
         this.view = new AnswerView();
         this.questionsViewController = questionsViewController;
@@ -43,6 +48,9 @@ public class AnswersViewController implements ActionListener {
         detectQuestion();
     }
 
+    /* El método detectQuestion nos permite saber qué pregunta ha clicado el usuario para poder cargar su texto y respuestas correspondientes, comparamos los datos del HashMap con los que tenemos en la vista
+    para poder identificar correctamente la pregunta y sus respuestas asociadas
+     */
     public void detectQuestion() {
         for (Map.Entry<String, TreeMap<Integer, Question>> elem : categories.entrySet()) {
             String key = elem.getKey();
@@ -66,6 +74,11 @@ public class AnswersViewController implements ActionListener {
         }
     }
 
+    /* El método ActionPerformed lo utilizamos para saber qué respuesta ha seleccionado el usuario, dependiendo de la respuesta seleccionada, realizamos un chequeo que nos sirve para determinar
+    si el usuario ha respondido correctamente, dependiendo de si la respuesta es correcta o no, manipulamos la vista de respuestas y además llamamos al controlador de Preguntas para que realice operaciones
+    en su vista como restar o sumar puntos y definir el turno actual. Por ultimo utilizamos un Timer para que la vista de respuestas se cierre después de un intervalo, ya que queremos que el usuario pueda
+    ver con claridad si ha fallado o ha acertado la pregunta
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getRes1()) {

@@ -5,6 +5,8 @@ import model.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/* La vista EndGameView se basa en una GridBagLayout donde disponemos de Labels que informan al usuario de toda la información de cada jugador. Dispone de un botón para cerrar
+ */
 public class EndGameView extends JFrame {
 
     private JLabel p1name, p2name, p1pts, p2pts, winner, pwinner;

@@ -19,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+/* Controlador encargado de crear la pantalla más importante del juego, la parrilla con todas las preguntas y sus valores
+ */
 public class QuestionsViewController implements ActionListener {
     private QuestionsView view;
     private Player p1;
@@ -68,6 +70,11 @@ public class QuestionsViewController implements ActionListener {
         gameManager.nextTurn();
     }
 
+    /* El método loadData() nos permite recoger toda la información de los archivos que contienen todas las categorías, preguntas y respuestas, iteramos sobre su longitud y vamos almacenando su contenido en
+    diferentes ArrayList auxiliares, dichos ArrayList auxiliares los desglosamos más adelante para meter su contenido en un HashMap que contendrá como clave el nombre de una categoría y como valor un
+    TreeMap que a su vez tiene como clave el valor de una pregunta y como valor la pregunta en sí. Al utilizar un TreeMap no nos tenemos que preocupar por el órden de valores ya que se ordenan naturalmente
+    de forma automática
+     */
     private void loadData() {
         BufferedReader br = null;
         String[] datos = null;
@@ -144,6 +151,9 @@ public class QuestionsViewController implements ActionListener {
 
     }
 
+    /* Los métodos setDataToButtons() y setDataToButtonsDouble nos sirven para poner en la vista los valores anteriormente almacenados. Podemos detectar cuando es la Double Jeopardy Round haciendo un chequeo
+    continuo con nuestro GameManager, que gestiona los parámetros generales de la partida.
+    */
     public void setDataToButtons() {
         ArrayList nameCategories = new ArrayList<String>();
         ArrayList price = new ArrayList<Integer>();
@@ -204,6 +214,9 @@ public class QuestionsViewController implements ActionListener {
         }
     }
 
+    /* Estos últimos métodos nos sirven mayoritariamente para comunicarnos con la vista y realizar diferentes operaciones como dar o restar puntos al jugador, mostrar el turno actual y en caso de que
+    haya finalizado la partida, mostrar la tabla de puntuación o empezar la Final Round si hay empate.
+    */
     public void printPositivePts() {
         if (p1.getName().equals(player.getName())) {
             player.setPts(answersViewController.getQuestion().getPts());

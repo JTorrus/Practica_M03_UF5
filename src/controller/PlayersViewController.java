@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/* Controlador encargado de crear los jugadores que jugarán la partida, implementa la interfaz ActionListener y KeyListener para poder realizar comprobaciones tanto del botón que pulsa el usuario como
+de lo que ha escrito en cada TextField. Realizamos un chequeo de si están los dos TextFields rellenados y si los nombres no son iguales, de ser así, permitimos comenzar una partida. De lo contrario,
+informamos al usuario
+ */
 public class PlayersViewController implements ActionListener, KeyListener {
     private PlayersView view;
 

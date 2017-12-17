@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/* La vista AnswersView se basa en dos paneles, el panel de la pregunta, cuyo layout es un BorderLayout definido en la posición NORTH, y las respuestas son un GridLayout de una columna.
+    */
 public class AnswerView extends JFrame {
     private JPanel answers, question;
     private JLabel questionText;

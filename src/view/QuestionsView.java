@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.layout.Pane;
 import model.Player;
 
 import javax.swing.*;
@@ -8,6 +7,9 @@ import java.awt.*;
 
 import static java.awt.Color.green;
 
+/* La vista QuestionsView dispone de un BorderLayout segmentado en un Panel con GridLayout para mostrar todas las categorías y preguntas y un JSplitPane en la posición SOUTH para poder mostrar la información
+actual de los jugadores en cada costado de dicho panel
+ */
 public class QuestionsView extends JFrame {
     private JButton[][] cells;
     private JPanel player1Board;

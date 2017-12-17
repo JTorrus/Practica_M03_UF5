@@ -2,7 +2,9 @@ package utilities;
 
 import controller.QuestionsViewController;
 import model.Player;
-
+/* La clase GameManager es la gestora del juego, se encarga de comprobar los diferentes estados de la partida, así como avanzzar turno, definir a que jugador le toca responder, cuando es el final de la partida
+y cuando empieza la DoubleRound
+ */
 public class GameManager {
     private Player player1;
     private Player player2;

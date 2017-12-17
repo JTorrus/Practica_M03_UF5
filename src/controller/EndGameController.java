@@ -11,10 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+// Controlador encargado de mostrar la ventana con los datos de la partida al finalizar
 public class EndGameController implements ActionListener {
     private EndGameView view;
     private Player p1, p2;
 
+    // En el constructor de la clase pasamos simplemente los dos jugadores
     public EndGameController(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
@@ -23,6 +25,9 @@ public class EndGameController implements ActionListener {
         setWinner();
     }
 
+    /* En el metodo setWinner realizamos la comprobación para determinar que jugador es el vencedor comprobando los puntos de cada uno, nos servirá para mostrarlo en la vista
+    y además escribirlo en un fichero
+    */
     public void setWinner() {
         Path path = Paths.get("ActualWinner.txt");
 

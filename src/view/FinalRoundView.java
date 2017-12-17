@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+/* La vista FinalRoundView se basa en su totalidad en la AnswersView con el añadido de mostrar el turno del jugador en cada respuesta en la posición SOUTH del BorderLayout
+ */
 public class FinalRoundView extends JFrame {
 
     private JPanel answers, question;

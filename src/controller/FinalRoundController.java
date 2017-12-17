@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+// Controlador encargado de empezar la Final Jeopardy Round
 public class FinalRoundController implements ActionListener {
 
     private FinalRoundView view;
@@ -25,6 +26,9 @@ public class FinalRoundController implements ActionListener {
     private Player player;
     private final int END_FINAL = 10;
 
+    /* En el constructor de la clase pasamos los dos jugadoores y el turno actual. Dependiendo de si el turno ha llegado a su final, mostraremos una ventana informando de un empate o de lo contrario
+    definiremos los atributos hasta que se termine la partida, ya que dicho controlador lo  llamaremos recursivamente más adelante
+    */
     public FinalRoundController(Player p1, Player p2, int controlTurn) {
         if (controlTurn == END_FINAL) {
             JOptionPane.showMessageDialog(null, "Es un empate!");
@@ -43,6 +47,9 @@ public class FinalRoundController implements ActionListener {
         }
     }
 
+    /* En el método actionPerformed controlamos tanto el turno actual del jugador como su respuesta, comprobamos si ha acertado su pregunta o no. De ser así el juego continuará con una llamada recursiva
+    al controlador, de lo contrario abriremos un nuevo controlador de final de partida para mostrar los resultados
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         view.getActualPlayer().setText("TURNO DE " + player.getName());
@@ -108,6 +115,8 @@ public class FinalRoundController implements ActionListener {
         }
     }
 
+    /* Con el método finalPlayerTurn realizamos una comprobación basada en pariedad para determinar a qué jugador le toca responder
+    */
     private Player finalPlayerTurn(int controlTurn) {
         if (controlTurn % 2 == 0) {
             return p1;
@@ -116,6 +125,9 @@ public class FinalRoundController implements ActionListener {
         }
     }
 
+    /* El método loadFinalData() nos permite recoger toda la información del archivo que contiene todas las preguntas y respuestas, iteramos sobre su longitud y vamos almacenando su contenido en
+    un ArrayList, para determinar que respuesta es la correcta hemos definido un carácter especial que nos servirá como referencia.
+     */
     private void loadFinalData() {
         BufferedReader br = null;
         Path p1 = FileSystems.getDefault().getPath("finalround");
@@ -161,6 +173,8 @@ public class FinalRoundController implements ActionListener {
         }
     }
 
+    /* Con el método setQuestions definimos correctamente qué pregunta se debe mostrar en cada turno cogiendo como índice del ArrayList el turno actual
+     */
     public void setQuestions() {
         Question actualQuestion = (Question) questions.get(controlTurn);
         view.getQuestionText().setText(actualQuestion.getText());
